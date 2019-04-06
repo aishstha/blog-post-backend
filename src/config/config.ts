@@ -14,9 +14,7 @@ export default {
   name: app.name,
   version: app.version,
   host: process.env.APP_HOST || "127.0.0.1",
-  dbConnectionString:
-    process.env.DB_HOST ||
-    "mongodb://admin:admin123@localhost:27017/fusemachine",
+  dbConnectionString: process.env.DB_HOST,
   environment: process.env.NODE_ENV || "development",
   appUrl: process.env.APP_URL || "http://localhost:8888",
   port:
