@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
 let Schema = mongoose.Schema;
-export const Users = new Schema({
+
+/**
+ * User Schema
+ */
+export const UserSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -36,7 +40,13 @@ export const Users = new Schema({
   }
 });
 
-Users.statics = {
+/**
+ * Statics
+ */
+UserSchema.statics = {
+  /**
+   * Fetch all users
+   */
   fetchAll() {
     return this.find()
       .exec()
@@ -54,4 +64,7 @@ Users.statics = {
   }
 };
 
-module.exports = exports = mongoose.model("users", Users);
+/**
+ * @typedef Users
+ */
+module.exports = exports = mongoose.model("Users", UserSchema);
