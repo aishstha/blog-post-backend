@@ -1,24 +1,21 @@
 import app from "./app";
+import mongoose from "mongoose";
 import config from "./config/config";
 import logger from "./utils/logger";
 import nodeErrorHandler from "./middlewares/nodeErrorHandler";
 
-import mongoose from "mongoose";
-
 const { port, host, dbConnectionString } = config;
 
-let options = { server: { socketOptions: { keepAlive: 1 } } };
+const options = { server: { socketOptions: { keepAlive: 1 } } };
 mongoose.connect(dbConnectionString, options);
 
-//Add those events to get more info about mongoose connection:
-
 // Connected handler
-mongoose.connection.on("connected", function(err) {
+mongoose.connection.on("connected", function(err: any) {
   console.log("Connected to DB using chain: " + dbConnectionString);
 });
 
 // Error handler
-mongoose.connection.on("error", function(err) {
+mongoose.connection.on("error", function(err: any) {
   console.log(err);
 });
 

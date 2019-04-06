@@ -1,8 +1,10 @@
-import * as HttpStatus from "http-status-codes";
-import { Request, Response, NextFunction } from "express";
+import * as HttpStatus from 'http-status-codes';
+import { Request, Response, NextFunction } from 'express';
 
-import config from "../config/config";
-import * as userService from "../services/userService";
+import config from '../config/config';
+import UserPayload from '../domain/requests/UserPayload';
+
+import * as userService from '../services/userService';
 
 const { messages } = config;
 
@@ -15,7 +17,8 @@ const { messages } = config;
  */
 export async function getAll(req: Request, res: Response, next: NextFunction) {
   try {
-    const response = await userService.fetchAll();
+    const searchKey = req.query.searchKey || '';
+    const response = await userService.fetchAll(searchKey);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
@@ -28,46 +31,17 @@ export async function getAll(req: Request, res: Response, next: NextFunction) {
 }
 
 /**
- * Controller to handle /users GET request.
+ * Controller to handle /users POST request.
  *
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function fetchById(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function create(req: Request, res: Response, next: NextFunction) {
   try {
-    const id: number = Number(req.params.id);
-    const response: any = await userService.fetchById(id);
+    const userPayload = req.body as UserPayload;
 
-    res.status(HttpStatus.OK).json({
-      code: HttpStatus.OK,
-      data: response,
-      message: messages.users.fetch
-    });
-  } catch (err) {
-    next(err);
-  }
-}
-
-/**
- * Controller to handle /users GET request.
- *
- * @param {Request} req
- * @param {Response} res
- * @param {NextFunction} next
- */
-export async function create(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
-  try {
-    const id: number = Number(req.params.id);
-    const response: any = await userService.create(id);
+    const response = await userService.create(userPayload);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
@@ -79,25 +53,48 @@ export async function create(
   }
 }
 
-// /**
-//  * Controller to handle /users POST request.
-//  *
-//  * @param {Request} req
-//  * @param {Response} res
-//  * @param {NextFunction} next
-//  */
-// export async function store(req: Request, res: Response, next: NextFunction) {
-//   try {
-//     const userPayload = req.body as UserPayload;
+/**
+ * Controller to handle /users POST request.
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
+export async function update(req: Request, res: Response, next: NextFunction) {
+  try {
+    const userPayload = req.body as UserPayload;
 
-//     const response = await userService.insert(userPayload);
+    const response = await userService.update(req.params.id, userPayload);
 
-//     res.status(HttpStatus.OK).json({
-//       code: HttpStatus.OK,
-//       data: response,
-//       message: messages.users.insert
-//     });
-//   } catch (err) {
-//     next(err);
-//   }
-// }
+    res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      data: response,
+      message: messages.users.insert
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+/**
+ * Controller to handle /users POST request.
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
+export async function getById(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id: string = req.params.id;
+
+    const response: any = await userService.getById(id);
+
+    res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      data: response,
+      message: messages.users.insert
+    });
+  } catch (err) {
+    next(err);
+  }
+}

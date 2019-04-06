@@ -1,33 +1,56 @@
-import User from "../models/userModel";
+import * as UserDao from '../daos/user';
+import UserPayload from '../domain/requests/UserPayload';
 
 /**
  * Fetch all users from users table.
  *
- * @returns {Promise<User[]>}
+ * @returns {Promise<UserPayload[]>}
  */
-export async function fetchAll() {
-  let users = await User.fetchAll();
+export async function fetchAll(searchKey: string): Promise<UserPayload[]> {
+  const users: any = await UserDao.fetchAll(searchKey);
 
   return users;
 }
 
 /**
- * Fetch users by id from users table.
+ *  Create new user in users table.
  *
- * @returns {Promise<User[]>}
+ * @param user Object
+ *
+ * @returns {Promise<UserPayload[]>}
  */
-export async function fetchById(id: number): Promise<any> {
-  let users = await User.fetchById(id);
+export async function create(user: UserPayload): Promise<UserPayload[]> {
+  const users: any = await UserDao.create(user);
 
   return users;
 }
-/*
-* Fetch users by id from users table.
-*
-* @returns {Promise<User[]>}
-*/
-export async function create(id: number): Promise<any> {
- let users = await User.create(id);
 
- return users;
+/**
+ *  Update user by id in users table.
+ *
+ * @param id String
+ * @param user Object
+ *
+ * @returns {Promise<UserPayload[]>}
+ */
+export async function update(
+  id: string,
+  user: UserPayload
+): Promise<UserPayload[]> {
+  const updateUser: any = await UserDao.update(id, user);
+
+  return updateUser;
+}
+
+/**
+ *  Ferch all users by id from users table.
+ *
+ * @param id String
+ *
+ * @returns {Promise<UserPayload[]>}
+ */
+export async function getById(id: string): Promise<UserPayload[]> {
+  const updateUser: any = await UserDao.getById(id);
+
+  return updateUser;
 }

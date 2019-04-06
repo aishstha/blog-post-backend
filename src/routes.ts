@@ -1,17 +1,18 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import * as homeController from "./controllers/home";
-import * as userController from "./controllers/user";
+import user from './routes/user';
+import * as homeController from './controllers/home';
 
 const router: Router = Router();
 
 /**
- * GET /
+ * GET /api
  */
-router.get("/", homeController.index);
+router.get('/', homeController.index);
 
-router.get("/users", userController.getAll);
-router.get("/users/:id(\\d+)", userController.fetchById); //to only use this route if the ID is a number
-router.post("/users/:id(\\d+)", userController.create);
+/**
+ * GET /api/users
+ */
+router.use('/users', user);
 
 export default router;
