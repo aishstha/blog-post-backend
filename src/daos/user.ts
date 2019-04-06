@@ -1,5 +1,5 @@
-import User from "../models/userModel";
-import UserPayload from "../domain/requests/UserPayload";
+import User from '../models/userModel';
+import UserPayload from '../domain/requests/UserPayload';
 
 export function create(user: UserPayload) {
   return new Promise((resolve, reject) => {
