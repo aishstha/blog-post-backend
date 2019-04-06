@@ -21,5 +21,13 @@ export async function fetchById(id: number): Promise<any> {
 
   return users;
 }
+/*
+* Fetch users by id from users table.
+*
+* @returns {Promise<User[]>}
+*/
+export async function create(id: number): Promise<any> {
+ let users = await User.create(id);
 
-export async function fetchaById() {}
+ return users;
+}

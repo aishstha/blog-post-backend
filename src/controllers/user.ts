@@ -46,7 +46,33 @@ export async function fetchById(
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: messages.users.fetchById
+      message: messages.users.fetch
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+/**
+ * Controller to handle /users GET request.
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
+export async function create(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const id: number = Number(req.params.id);
+    const response: any = await userService.create(id);
+
+    res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      data: response,
+      message: messages.users.insert
     });
   } catch (err) {
     next(err);

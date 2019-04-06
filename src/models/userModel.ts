@@ -40,6 +40,19 @@ export const UserSchema = new Schema({
   }
 });
 
+UserSchema.pre('save', function (next) {
+  let now = Date.now()
+
+  // this.updatedAt = now
+  // // Set a value for createdAt only if it is null
+  // if (!this.createdAt) {
+  //   this.createdAt = now
+  // }
+  // Call the next function in the pre-save chain
+  next()
+})
+
+const Users = mongoose.model("Users", UserSchema);
 /**
  * Statics
  */
@@ -55,8 +68,16 @@ UserSchema.statics = {
       });
   },
 
-  fetchById(id: string) {
+  fetchById(id: number) {
     return this.find({ id })
+      .exec()
+      .then((res: any) => {
+        return res;
+      });
+  },
+
+  create() {
+    return this.save({ name: "test" })
       .exec()
       .then((res: any) => {
         return res;
@@ -67,4 +88,4 @@ UserSchema.statics = {
 /**
  * @typedef Users
  */
-module.exports = exports = mongoose.model("Users", UserSchema);
+module.exports = exports = Users;
