@@ -13,9 +13,8 @@ const router: Router = Router();
 router.get('/', homeController.index);
 
 /**
- * GET /api/users
+ * GET /api/profile
  */
-router.use('/users', user);
-router.use('/profile', profile);
+router.use('/profile', user);
 
 export default router;
