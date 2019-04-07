@@ -55,7 +55,7 @@
     "joi": "^13.1.2",
     "jsonwebtoken": "^8.2.1",
     "mongoose": "^5.4.22",
-    "morgan": "^1.9.0",
+    "morgan": ">=1.9.1",
     "winston": "^2.4.0",
     "winston-daily-rotate-file": "^3.1.3"
   },
