@@ -77,7 +77,7 @@ export async function update(req: Request, res: Response, next: NextFunction) {
 }
 
 /**
- * Controller to handle /users POST request.
+ * Controller to handle /users GET by id request.
  *
  * @param {Request} req
  * @param {Response} res
