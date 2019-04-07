@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 export const Posts = new Schema({
@@ -31,4 +31,4 @@ export const Posts = new Schema({
   }
 });
 
-module.exports = exports = mongoose.model("posts", Posts);
+module.exports = exports = mongoose.model('posts', Posts);

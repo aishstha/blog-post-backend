@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 export const Comments = new Schema({
@@ -32,4 +32,4 @@ export const Comments = new Schema({
   }
 });
 
-module.exports = exports = mongoose.model("comments", Comments);
+module.exports = exports = mongoose.model('comments', Comments);

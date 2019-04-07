@@ -1,5 +1,5 @@
-import User from '../models/userModel';
-import UserPayload from '../domain/requests/UserPayload';
+import User from "../models/userModel";
+import UserPayload from "../domain/requests/UserPayload";
 
 export function create(user: UserPayload) {
   return new Promise((resolve, reject) => {
@@ -25,8 +25,9 @@ export function fetchAll(searchKey: string) {
 
 export function update(id: any, user: object) {
   return new Promise((resolve, reject) => {
-    User.findOneAndUpdate({ _id: id }, user)
-      .then((userInfo: any) => resolve(userInfo))
+    User.findOneAndUpdate({ _id: id }, user, { upsert: true, new: true})
+      .then((userInfo: any) => {
+        resolve(userInfo)})
       .catch((err: any) => reject(err));
   });
 }

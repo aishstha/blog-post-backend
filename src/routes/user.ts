@@ -1,27 +1,27 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import * as userController from "../controllers/user";
+import * as userController from '../controllers/user';
 
 const router: Router = Router();
 
 /**
  * GET /api/profile
  */
-router.get("/", userController.getAll);
+router.get('/', userController.getAll);
 
 /**
  * POST /api/profile
  */
-router.post("/", userController.create);
+router.post('/', userController.create);
 
 /**
  * PUT /api/profile/:id
  */
-router.put("/:id", userController.update);
+router.put('/:id', userController.update);
 
 /**
  * GET /api/profile/:id
  */
-router.get("/:id", userController.getById);
+router.get('/:id', userController.getById);
 
 export default router;
