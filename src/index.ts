@@ -1,13 +1,15 @@
 import app from './app';
-import mongoose from 'mongoose';
 import config from './config/config';
 import logger from './utils/logger';
 import nodeErrorHandler from './middlewares/nodeErrorHandler';
+import mongoose from 'mongoose';
 
 const { port, host, dbConnectionString } = config;
-
+console.log('dbConnectionString', dbConnectionString);
 const options = { server: { socketOptions: { keepAlive: 1 } } };
 mongoose.connect(dbConnectionString, options);
+
+// Add those events to get more info about mongoose connection:
 
 // Connected handler
 mongoose.connection.on('connected', function(err: any) {

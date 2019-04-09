@@ -41,14 +41,14 @@ export async function getAll(req: Request, res: Response, next: NextFunction) {
 export async function create(req: Request, res: Response, next: NextFunction) {
   try {
     const userPayload = req.body as LoginPayload;
-    console.log("the payload is ", req.body)
-    let payload = await authService.verifyGoogleAccount(userPayload.token);
-    let user = await userService.findByGoogleId(payload.userId)
+    const payload = await authService.verifyGoogleAccount(userPayload.token);
+    const user = await userService.findByGoogleId(payload.userId)
 
-    if(user.length)
-      throw new Error("User already existed")
+    if (user.length) {
+      throw new Error('User already existed')
+    }
 
-    let newUser = {
+    const newUser = {
       name: payload.name,
       email: payload.email,
       userId: payload.userId,

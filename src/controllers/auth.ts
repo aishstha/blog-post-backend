@@ -29,11 +29,11 @@ export async function login(req: Request, res: Response, next: NextFunction) {
     const refreshToken = utilService.generateRefreshToken(tokenData);
 
     const response = {
+      accessToken,
+      refreshToken,
       name: user[0].name,
       email: user[0].email,
       image: user[0].image,
-      accessToken,
-      refreshToken
     }
     
 

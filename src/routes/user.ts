@@ -10,9 +10,9 @@ const router: Router = Router();
 router.get('/', userController.getAll);
 
 /**
- * POST /api/profile
+ * POST /api/profile/signup
  */
-router.post('/', userController.create);
+router.post('/signup', userController.create);
 
 /**
  * PUT /api/profile/:id

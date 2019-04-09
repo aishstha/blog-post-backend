@@ -54,3 +54,9 @@ export async function getById(id: string): Promise<UserPayload[]> {
 
   return updateUser;
 }
+
+export async function findByGoogleId(id: string): Promise<UserPayload[]> {
+  const updateUser: any = await UserDao.findByGoogleId(id);
+
+  return updateUser;
+}

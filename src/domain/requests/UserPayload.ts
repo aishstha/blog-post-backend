@@ -4,7 +4,8 @@
 interface UserPayload {
   name: string;
   email: string;
-  password: string;
+  userId: string;
+  image: string;
 }
 
 export default UserPayload;

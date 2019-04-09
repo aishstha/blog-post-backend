@@ -1,41 +1,48 @@
-import User from "../models/userModel";
-import UserPayload from "../domain/requests/UserPayload";
+import User from '../models/userModel';
+import UserPayload from '../domain/requests/UserPayload';
 
-export function create(user: UserPayload) {
+export function create(user: UserPayload){
   return new Promise((resolve, reject) => {
-    const UserModel = new User(user);
+    const UserModel = new User(user)
     UserModel.save()
-      .then((userInfo: any) => resolve(userInfo))
-      .catch((err: any) => reject(err));
+    .then((user: any) => resolve(user))
+    .catch((err: any) => reject(err));
   });
 }
 
-export function fetchAll(searchKey: string) {
+export function fetchAll(searchKey: string){
   return new Promise((resolve, reject) => {
-    const option = {};
+    const option = {}
     if (searchKey) {
       option.name = searchKey;
     }
 
     User.find(option)
-      .then((userInfo: any) => resolve(userInfo))
-      .catch((err: any) => reject(err));
+    .then((user: any) => resolve(user))
+    .catch((err: any) => reject(err));
   });
 }
 
-export function update(id: any, user: object) {
+export function update(id: any , user: object){
   return new Promise((resolve, reject) => {
-    User.findOneAndUpdate({ _id: id }, user, { upsert: true, new: true})
-      .then((userInfo: any) => {
-        resolve(userInfo)})
-      .catch((err: any) => reject(err));
+    User.findOneAndUpdate({_id: id}, user)
+    .then((user: any) => resolve(user))
+    .catch((err: any) => reject(err));
   });
 }
 
-export function getById(id: any) {
+export function getById(id: any){
   return new Promise((resolve, reject) => {
     User.findById(id)
-      .then((userInfo: any) => resolve(userInfo))
-      .catch((err: any) => reject(err));
+    .then((user: any) => resolve(user))
+    .catch((err: any) => reject(err));
+  });
+}
+
+export function findByGoogleId(id: any){
+  return new Promise((resolve, reject) => {
+    User.find({userId: id})
+    .then((user: any) => resolve(user))
+    .catch((err: any) => reject(err));
   });
 }
