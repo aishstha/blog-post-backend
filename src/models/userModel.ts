@@ -43,6 +43,9 @@ export const Users = new Schema({
   user_image: {
     type: String,
     required: false
+  },
+  image: {
+    type: String
   }
 });
 
