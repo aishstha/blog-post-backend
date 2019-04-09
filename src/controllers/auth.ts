@@ -16,18 +16,19 @@ export async function login(req: Request, res: Response, next: NextFunction) {
   try {
     const loginPayload = req.body as LoginPayload;
 
-    let payload = await authService.verifyGoogleAccount(loginPayload.token);
-    let user = await userService.findByGoogleId(payload.userId)
+    const payload = await authService.verifyGoogleAccount(loginPayload.token);
+    const user = await userService.findByGoogleId(payload.userId)
 
-    if(!user.length)
+    if (!user.length) {
       throw new Error('No user found');
+    }
 
-    let tokenData = {id: user[0]._id};
+    const tokenData = {id: user[0]._id};
 
-    let accessToken = utilService.generateAccessToken(tokenData);
-    let refreshToken = utilService.generateRefreshToken(tokenData);
+    const accessToken = utilService.generateAccessToken(tokenData);
+    const refreshToken = utilService.generateRefreshToken(tokenData);
 
-    let response = {
+    const response = {
       name: user[0].name,
       email: user[0].email,
       image: user[0].image,
