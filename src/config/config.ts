@@ -13,6 +13,7 @@ export default {
   messages,
   name: app.name,
   version: app.version,
+  googleClientId: process.env.GOOGLE_CLIENT_ID,
   host: process.env.APP_HOST || '127.0.0.1',
   dbConnectionString: process.env.DB_HOST,
   environment: process.env.NODE_ENV || 'development',
@@ -36,5 +37,8 @@ export default {
     maxSize: process.env.LOGGING_MAX_SIZE || '20m',
     maxFiles: process.env.LOGGING_MAX_FILES || '7d',
     datePattern: process.env.LOGGING_DATE_PATTERN || 'YYYY-MM-DD'
+  },
+  ERROR_MESSAGE: {
+    TOKEN_REQUIRED: 'Token is required to login'
   }
 };
