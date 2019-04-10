@@ -1,7 +1,8 @@
-import * as PostDao from '../daos/post';
-import PostPayload from '../domain/requests/PostPayload';
+import * as PostDao from "../daos/post";
+import PostPayload from "../domain/requests/PostPayload";
+import { IPostPayload } from "./../interface/post";
 
-const option = '';
+const option = "";
 export async function create(post: PostPayload): Promise<PostPayload[]> {
   await PostDao.create(post);
   const posts: any = await PostDao.fetchAll(option);
@@ -26,10 +27,26 @@ export async function fetchAll(searchKey: string): Promise<PostPayload[]> {
   return users;
 }
 
-
 // TODO: Not working
 export async function deleteById(id: string): Promise<PostPayload[]> {
   const posts: any = await PostDao.deleteById(id);
 
   return posts;
+}
+
+/**
+ *  Update post by id.
+ *
+ * @param id String
+ * @param post Object
+ *
+ * @returns {Promise<IPostPayload[]>}
+ */
+export async function updateById(
+  id: string,
+  post: IPostPayload
+): Promise<IPostPayload[]> {
+  const updateUser: any = await PostDao.updateById(id, post);
+
+  return updateUser;
 }

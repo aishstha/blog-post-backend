@@ -1,5 +1,5 @@
-import Post from '../models/postModel';
-import PostPayload from '../domain/requests/PostPayload';
+import Post from "../models/postModel";
+import PostPayload from "../domain/requests/PostPayload";
 
 export function create(post: PostPayload) {
   return new Promise((resolve, reject) => {
@@ -13,7 +13,7 @@ export function create(post: PostPayload) {
 export function getById(id: any) {
   return new Promise((resolve, reject) => {
     Post.findById(id)
-      .populate('users', 'name')
+      .populate("users", "name")
       .then((user: any) => resolve(user))
       .catch((err: any) => reject(err));
   });
@@ -27,7 +27,7 @@ export function fetchAll(searchKey: string) {
     }
 
     Post.find(option)
-      .populate('users', 'name')
+      .populate("users", "name")
       .then((user: any) => resolve(user))
       .catch((err: any) => reject(err));
   });
@@ -36,6 +36,14 @@ export function fetchAll(searchKey: string) {
 export function deleteById(id: string) {
   return new Promise((resolve, reject) => {
     Post.deleteOne({ id })
+      .then((user: any) => resolve(user))
+      .catch((err: any) => reject(err));
+  });
+}
+
+export function updateById(id: any, user: object) {
+  return new Promise((resolve, reject) => {
+    Post.findOneAndUpdate({ _id: id }, user, { new: true })
       .then((user: any) => resolve(user))
       .catch((err: any) => reject(err));
   });

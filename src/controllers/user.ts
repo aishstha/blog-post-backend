@@ -43,6 +43,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     const userPayload = req.body as LoginPayload;
     const payload = await authService.verifyGoogleAccount(userPayload.token);
     const user = await userService.findByGoogleId(payload.userId)
+    console.log("payload", payload);
 
     if (user.length) {
       throw new Error('User already existed')
@@ -56,6 +57,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     }
 
     const response = await userService.create(newUser);
+    console.log("created user ", response)
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
@@ -63,6 +65,8 @@ export async function create(req: Request, res: Response, next: NextFunction) {
       message: messages.users.insert
     });
   } catch (err) {
+    console.log("TODO: No user found", err);
+
     next(err);
   }
 }

@@ -14,6 +14,8 @@ router.post('/:postId/comments', commentController.create);
 
 router.delete('/:id', postController.deletePostById);
 
+router.put('/:id', postController.updatePostById);
+
 // router.put('/:id', userController.update);
 // router.get('/:postId/comments', commentController.create)
 

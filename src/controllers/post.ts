@@ -1,10 +1,11 @@
-import * as HttpStatus from 'http-status-codes';
-import { Request, Response, NextFunction } from 'express';
+import * as HttpStatus from "http-status-codes";
+import { Request, Response, NextFunction } from "express";
 
 // import config from '../config/config';
-import * as postService from '../services/postService';
-import * as commentService from '../services/commentService';
-import PostPayload from '../domain/requests/PostPayload';
+import * as postService from "../services/postService";
+import * as commentService from "../services/commentService";
+import PostPayload from "../domain/requests/PostPayload";
+import { IPostPayload } from "./../interface/post";
 
 /**
  * Controller to handle /posts POST request.
@@ -22,7 +23,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: 'created'
+      message: "created"
     });
   } catch (err) {
     next(err);
@@ -46,13 +47,13 @@ export async function getById(req: Request, res: Response, next: NextFunction) {
       id: post._id,
       user: post.users,
       title: post.title,
-      description: post.description,
+      description: post.description
     };
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: 'data'
+      message: "data"
     });
   } catch (err) {
     next(err);
@@ -68,13 +69,13 @@ export async function getById(req: Request, res: Response, next: NextFunction) {
  */
 export async function getAll(req: Request, res: Response, next: NextFunction) {
   try {
-    const searchKey = req.query.searchKey || '';
+    const searchKey = req.query.searchKey || "";
     const response = await postService.fetchAll(searchKey);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: 'All post'
+      message: "All post"
     });
   } catch (err) {
     next(err);
@@ -82,7 +83,7 @@ export async function getAll(req: Request, res: Response, next: NextFunction) {
 }
 
 /**
- * Controller to handle /posts POST request.
+ * Controller to handle /posts/:id DELETE request.
  *
  * @param {Request} req
  * @param {Response} res
@@ -99,7 +100,34 @@ export async function deletePostById(
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: 'Deleted'
+      message: "Deleted"
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+/**
+ * Controller to handle /posts/:id PUT request.
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
+export async function updatePostById(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const postPayload = req.body as IPostPayload;
+
+    const response = await postService.updateById(req.params.id, postPayload);
+
+    res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      data: response,
+      message: 'Updated'
     });
   } catch (err) {
     next(err);
