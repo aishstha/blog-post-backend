@@ -33,7 +33,6 @@ export async function fetchAll(searchKey: string): Promise<PostPayload[]> {
   return users;
 }
 
-// TODO: Not working
 export async function deleteById(id: string): Promise<PostPayload[]> {
   const posts: any = await PostDao.deleteById(id);
 

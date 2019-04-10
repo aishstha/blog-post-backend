@@ -57,3 +57,9 @@ export async function updateSubComment(
 
   return newComment;
 }
+
+export async function deleteById(id: string): Promise<CommentPayload[]> {
+  const posts: any = await CommentDao.deleteById(id);
+
+  return posts;
+}

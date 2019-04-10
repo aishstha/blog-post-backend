@@ -86,3 +86,12 @@ export function updateSubComment(
       .catch((err: any) => reject(err));
   });
 }
+
+export function deleteById(id: string) {
+  return new Promise((resolve, reject) => {
+    Comment.deleteOne({ _id: id  })
+      .then((user: any) => resolve(user))
+      .catch((err: any) => reject(err));
+  });
+}
+
