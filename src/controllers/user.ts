@@ -43,7 +43,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     const userPayload = req.body as LoginPayload;
     const payload = await authService.verifyGoogleAccount(userPayload.token);
     const user = await userService.findByGoogleId(payload.userId)
-    console.log("payload", payload);
+    console.log('payload', payload);
 
     if (user.length) {
       throw new Error('User already existed')
@@ -57,7 +57,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     }
 
     const response = await userService.create(newUser);
-    console.log("created user ", response)
+    console.log('created user ', response)
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
@@ -65,7 +65,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
       message: messages.users.insert
     });
   } catch (err) {
-    console.log("TODO: No user found", err);
+    console.log('TODO: No user found', err);
 
     next(err);
   }
@@ -82,7 +82,8 @@ export async function update(req: Request, res: Response, next: NextFunction) {
   try {
     const userPayload = req.body as UserPayload;
 
-    const response = await userService.update(req.params.id, userPayload);
+    // const response = await userService.update(req.params.id, userPayload);
+    const response = await userService.update(res.locals.loggedInPayload.id, userPayload);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
@@ -115,3 +116,24 @@ export async function getById(req: Request, res: Response, next: NextFunction) {
   }
 }
 
+/**
+ * Controller to handle /users POST request.
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
+export async function getUserDetail(req: Request, res: Response, next: NextFunction) {
+  try {
+    const response = await userService.getById(res.locals.loggedInPayload.id);
+
+     res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      data: response,
+      message: messages.users.insert
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+  

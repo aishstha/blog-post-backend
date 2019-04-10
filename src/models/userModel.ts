@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 export const Users = new Schema({
@@ -46,7 +46,10 @@ export const Users = new Schema({
   },
   image: {
     type: String
+  },
+  refreshToken: {
+    type: Array
   }
 });
 
-module.exports = exports = mongoose.model('users', Users);
+module.exports = exports = mongoose.model("users", Users);

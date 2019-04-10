@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import * as postController from '../controllers/post';
 import * as commentController from '../controllers/comment';
+import authenticate from '../middlewares/authenticate';
 
 const router: Router = Router();
 
@@ -9,12 +10,12 @@ const router: Router = Router();
 router.get('/', postController.getAll);
 router.get('/:id', postController.getById);
 
-router.post('/', postController.create);
-router.post('/:postId/comments', commentController.create);
+router.post('/',authenticate, postController.create);
+router.post('/:postId/comments',authenticate, commentController.create);
 
-router.delete('/:id', postController.deletePostById);
+router.delete('/:id', postController.deletePostById); //,authenticate,
 
-router.put('/:id', postController.updatePostById);
+router.put('/:id', authenticate,postController.updatePostById);
 
 // router.put('/:id', userController.update);
 // router.get('/:postId/comments', commentController.create)

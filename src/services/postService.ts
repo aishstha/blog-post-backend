@@ -3,9 +3,15 @@ import PostPayload from "../domain/requests/PostPayload";
 import { IPostPayload } from "./../interface/post";
 
 const option = "";
-export async function create(post: PostPayload): Promise<PostPayload[]> {
-  await PostDao.create(post);
-  const posts: any = await PostDao.fetchAll(option);
+export async function create(
+  userId: any,
+  post: PostPayload
+): Promise<PostPayload[]> {
+  post.users = {
+    _id: userId
+  };
+  const posts: any = await PostDao.create(post);
+  // const posts: any = await PostDao.fetchAll(option);
 
   return posts;
 }

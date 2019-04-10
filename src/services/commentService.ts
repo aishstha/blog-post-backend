@@ -1,14 +1,18 @@
-import * as CommentDao from '../daos/comment';
-import CommentPayload from '../domain/requests/CommentPayload';
+import * as CommentDao from "../daos/comment";
+import CommentPayload from "../domain/requests/CommentPayload";
 
-export async function create(comment: CommentPayload, postId: any): Promise<CommentPayload[]> {
-  const newComment: any = await CommentDao.create(comment, postId)
+export async function create(
+  comment: CommentPayload,
+  postId: any,
+  userId: any
+): Promise<CommentPayload[]> {
+  const newComment: any = await CommentDao.create(comment, postId, userId);
 
   return newComment;
 }
 
 export async function findByPostId(postId: any): Promise<CommentPayload[]> {
-  const newComment: any = await CommentDao.findByPostId(postId)
+  const newComment: any = await CommentDao.findByPostId(postId);
 
   return newComment;
 }
@@ -26,14 +30,30 @@ export async function findByPostId(postId: any): Promise<CommentPayload[]> {
 //   });
 // }
 
-export async function createSubComment(subComment: CommentPayload, commentId: any): Promise<CommentPayload[]> {
-  const newComment: any = await CommentDao.createSubComment(subComment, commentId)
+export async function createSubComment(
+  subComment: CommentPayload,
+  commentId: any,
+  userId: any
+): Promise<CommentPayload[]> {
+  const newComment: any = await CommentDao.createSubComment(
+    subComment,
+    commentId,
+    userId
+  );
 
   return newComment;
 }
 
-export async function updateSubComment(subComment: CommentPayload, commentId: any, subCommentId: any): Promise<CommentPayload[]> {
-  const newComment: any = await CommentDao.updateSubComment(subComment, commentId, subCommentId)
+export async function updateSubComment(
+  subComment: CommentPayload,
+  commentId: any,
+  subCommentId: any
+): Promise<CommentPayload[]> {
+  const newComment: any = await CommentDao.updateSubComment(
+    subComment,
+    commentId,
+    subCommentId
+  );
 
   return newComment;
 }

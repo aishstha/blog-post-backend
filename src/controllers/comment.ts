@@ -16,7 +16,8 @@ export async function create(req: Request, res: Response, next: NextFunction) {
   try {
     const commentPayload = req.body as CommentPayload;
 
-    const response = await commentService.create(commentPayload, req.params.postId);
+    // const response = await commentService.create(commentPayload, req.params.postId);
+    const response = await commentService.create(commentPayload, req.params.postId, res.locals.loggedInPayload.id);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
@@ -62,8 +63,9 @@ export async function createSubComment(req: Request, res: Response, next: NextFu
   try {
     const subCommentPayload = req.body as CommentPayload;
 
-    const response = await commentService.createSubComment(subCommentPayload, req.params.id);
-
+    // const response = await commentService.createSubComment(subCommentPayload, req.params.id);
+    const response = await commentService.createSubComment(subCommentPayload, req.params.id, res.locals.loggedInPayload.id);
+    
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
