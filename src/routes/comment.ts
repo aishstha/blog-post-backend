@@ -16,8 +16,8 @@ router.put(
   commentController.editSubComment
 );
 
-router.delete("/:id", authenticate, commentController.deletePostById);
-router.put("/:id", commentController.update);
+router.delete("/:id", authenticate, commentController.deleteById);
+router.put("/:id", authenticate, commentController.update);
 router.delete(
   "/:id/sub-comments/:subCommentId",
   commentController.removeSubComment

@@ -57,12 +57,8 @@ export async function update(
 ): Promise<CommentPayload[]> {
   const fetchComment: any = await CommentDao.getById(id);
 
-  console.log(typeof fetchComment.users._id);
-
   if (currentUserId !== fetchComment.users.toString()) {
     throw new UnauthorizedError(config.ERROR_MESSAGE.INVALID_ACTION);
-
-    return;
   }
 
   console.log("eta ayo");
@@ -82,3 +78,8 @@ export async function removeSubComment(
   return newComment;
 }
 
+export async function deleteById(id: string): Promise<PostPayload[]> {
+  const posts: any = await CommentDao.deleteById({ _id: id });
+
+  return posts;
+}
