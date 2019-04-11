@@ -1,12 +1,12 @@
-import Comment from "../models/commentModel";
-import CommentPayload from "../domain/requests/CommentPayload";
-import config from "../config/config";
-import UnauthorizedError from "../exceptions/UnauthorizedError";
+import Comment from '../models/commentModel';
+import CommentPayload from '../domain/requests/CommentPayload';
+import config from '../config/config';
+import UnauthorizedError from '../exceptions/UnauthorizedError';
 
 export function create(comment: CommentPayload, postId: any, userId: any) {
   return new Promise((resolve, reject) => {
     const buildComment = {
-      description: comment.description || "",
+      description: comment.description || '',
       posts: {
         _id: postId
       },
@@ -25,18 +25,18 @@ export function findByPostId(postId: string) {
   return new Promise((resolve, reject) => {
     let option = {};
     if (!postId) {
-      throw new Error("Please provide post id.");
+      throw new Error('Please provide post id.');
     }
     option = {
       posts: postId
     };
 
     Comment.find(option)
-      .populate("users", "name")
+      .populate('users', 'name')
       .populate({
-        path: "sub_comments.users",
-        model: "users",
-        select: "name"
+        path: 'sub_comments.users',
+        model: 'users',
+        select: 'name'
       })
       .then((user: any) => resolve(user))
       .catch((err: any) => reject(err));
@@ -50,7 +50,7 @@ export function createSubComment(
 ) {
   return new Promise((resolve, reject) => {
     const sub_comment = {
-      description: subComment.description || "",
+      description: subComment.description || '',
       users: {
         _id: userId
       }
@@ -75,13 +75,14 @@ export function updateSubComment(
     Comment.findById(commentId)
       .then((comment: any) => {
         const subDoc = comment.sub_comments.id(subCommentId);
-        console.log("subDoc.users", subDoc.users);
-        console.log("currentUserId", currentUserId);
-        if (subDoc.users.toString() !== currentUserId)
+        console.log('subDoc.users', subDoc.users);
+        console.log('currentUserId', currentUserId);
+        if (subDoc.users.toString() !== currentUserId) {
           throw new UnauthorizedError(config.ERROR_MESSAGE.INVALID_ACTION);
+        }
 
         console.log(subDoc);
-        subDoc.set({ description: subComment.description || "" });
+        subDoc.set({ description: subComment.description || '' });
 
         comment
           .save()

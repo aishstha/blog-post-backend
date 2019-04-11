@@ -1,6 +1,6 @@
-import UserPayload from "../domain/requests/UserPayload";
+import UserPayload from '../domain/requests/UserPayload';
 
-import * as UserDao from "../daos/user";
+import * as UserDao from '../daos/user';
 
 /**
  * Fetch all users from users table.

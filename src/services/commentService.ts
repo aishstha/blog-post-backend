@@ -1,8 +1,8 @@
-import config from "../config/config";
-import UnauthorizedError from "../exceptions/UnauthorizedError";
-import CommentPayload from "../domain/requests/CommentPayload";
+import config from '../config/config';
+import UnauthorizedError from '../exceptions/UnauthorizedError';
+import CommentPayload from '../domain/requests/CommentPayload';
 
-import * as CommentDao from "../daos/comment";
+import * as CommentDao from '../daos/comment';
 
 export async function create(
   comment: CommentPayload,
@@ -61,7 +61,7 @@ export async function update(
     throw new UnauthorizedError(config.ERROR_MESSAGE.INVALID_ACTION);
   }
 
-  console.log("eta ayo");
+  console.log('eta ayo');
   const updateComment: any = await CommentDao.update(id, {
     description: comment.description
   });

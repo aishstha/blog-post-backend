@@ -35,9 +35,9 @@ export async function login(req: Request, res: Response, next: NextFunction) {
       };
 
       user = await userService.create(newUser);
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.",user)
+      console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.', user)
     }
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>USER EXIST.",user)
+    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>USER EXIST.', user)
 
     const tokenData = { id: user[0]._id };
 
