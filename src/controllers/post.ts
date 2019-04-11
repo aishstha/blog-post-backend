@@ -1,11 +1,11 @@
-import * as HttpStatus from "http-status-codes";
-import { Request, Response, NextFunction } from "express";
+import * as HttpStatus from 'http-status-codes';
+import { Request, Response, NextFunction } from 'express';
 
 // import config from '../config/config';
-import * as postService from "../services/postService";
-import * as commentService from "../services/commentService";
-import PostPayload from "../domain/requests/PostPayload";
-import { IPostPayload } from "./../interface/post";
+import * as postService from '../services/postService';
+import * as commentService from '../services/commentService';
+import PostPayload from '../domain/requests/PostPayload';
+import { IPostPayload } from './../interface/post';
 
 /**
  * Controller to handle /posts POST request.
@@ -18,7 +18,6 @@ export async function create(req: Request, res: Response, next: NextFunction) {
   try {
     const postPayload = req.body as PostPayload;
 
-    // const response = await postService.create(postPayload);
     const response = await postService.create(
       res.locals.loggedInPayload.id,
       postPayload
@@ -27,7 +26,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "created"
+      message: 'created'
     });
   } catch (err) {
     next(err);
@@ -43,8 +42,6 @@ export async function create(req: Request, res: Response, next: NextFunction) {
  */
 export async function getById(req: Request, res: Response, next: NextFunction) {
   try {
-    // const post = await postService.getById(req.params.id);
-    // const comments = await commentService.findByPostId(req.params.id);
     const post = await postService.getById(req.params.id);
     const comments = await commentService.findByPostId(req.params.id);
 
@@ -59,7 +56,7 @@ export async function getById(req: Request, res: Response, next: NextFunction) {
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "data"
+      message: 'data'
     });
   } catch (err) {
     next(err);
@@ -75,13 +72,13 @@ export async function getById(req: Request, res: Response, next: NextFunction) {
  */
 export async function getAll(req: Request, res: Response, next: NextFunction) {
   try {
-    const searchKey = req.query.searchKey || "";
+    const searchKey = req.query.searchKey || '';
     const response = await postService.fetchAll(searchKey);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "All post"
+      message: 'All post'
     });
   } catch (err) {
     next(err);
@@ -106,7 +103,7 @@ export async function deletePostById(
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "Deleted"
+      message: 'Deleted'
     });
   } catch (err) {
     next(err);
@@ -130,7 +127,7 @@ export async function update(req: Request, res: Response, next: NextFunction) {
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "Updated"
+      message: 'Updated'
     });
   } catch (err) {
     next(err);

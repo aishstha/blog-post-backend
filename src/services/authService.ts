@@ -1,5 +1,3 @@
-// const { OAuth2Client } = require('google-auth-library');
-
 import config from '../config/config';
 import { OAuth2Client } from 'google-auth-library';
 import UnauthorizedError from '../exceptions/UnauthorizedError';

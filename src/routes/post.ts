@@ -1,8 +1,9 @@
 import { Router } from 'express';
 
+import authenticate from '../middlewares/authenticate';
+
 import * as postController from '../controllers/post';
 import * as commentController from '../controllers/comment';
-import authenticate from '../middlewares/authenticate';
 
 const router: Router = Router();
 

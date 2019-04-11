@@ -1,14 +1,16 @@
-import * as utilService from '../utils/jwt';
-import * as HttpStatus from 'http-status-codes';
 import { Request, Response, NextFunction } from 'express';
-import * as authService from '../services/authService';
-import * as userService from '../services/userService';
-import LoginPayload from '../domain/requests/LoginPayload';
+
 import config from '../config/config';
+import LoginPayload from '../domain/requests/LoginPayload';
 import BadRequestError from '../exceptions/BadRequestError';
 
+import * as utilService from '../utils/jwt';
+import * as HttpStatus from 'http-status-codes';
+import * as authService from '../services/authService';
+import * as userService from '../services/userService';
+
 /**
- * Controller to handle /posts POST request.
+ * Controller to handle /login request.
  *
  * @param {Request} req
  * @param {Response} res
@@ -16,7 +18,6 @@ import BadRequestError from '../exceptions/BadRequestError';
  */
 export async function login(req: Request, res: Response, next: NextFunction) {
   try {
-
     if (!req.body.token) {
       throw new BadRequestError(config.ERROR_MESSAGE.TOKEN_REQUIRED);
     }
@@ -24,7 +25,6 @@ export async function login(req: Request, res: Response, next: NextFunction) {
     const loginPayload = req.body as LoginPayload; // todo loginorsignup change name
     const payload = await authService.verifyGoogleAccount(loginPayload.token);
     let user = await userService.findByGoogleId(payload.userId);
-    console.log('payload', payload);
 
     if (!user.length) {
       const newUser = {
@@ -36,7 +36,6 @@ export async function login(req: Request, res: Response, next: NextFunction) {
 
       user = await userService.create(newUser);
     }
-    console.log('>>>>>>>>>>>>>>>>>>>>>', user);
 
     const tokenData = { id: user[0]._id };
 
@@ -65,15 +64,19 @@ export async function login(req: Request, res: Response, next: NextFunction) {
 }
 
 /**
- * Handle /refresh request.
+ * Controller to handle /refresh request.
  *
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function getAccesstoken(req: Request, res: Response, next: NextFunction) {
+export async function getAccesstoken(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
-    const tokenData = {id: res.locals.loggedInPayload.id};
+    const tokenData = { id: res.locals.loggedInPayload.id };
 
     const accessToken = utilService.generateAccessToken(tokenData);
 
@@ -87,8 +90,8 @@ export async function getAccesstoken(req: Request, res: Response, next: NextFunc
   }
 }
 
- /**
- * Handle /refresh request.
+/**
+ * Controller to handle /logout request.
  *
  * @param {Request} req
  * @param {Response} res
@@ -96,13 +99,12 @@ export async function getAccesstoken(req: Request, res: Response, next: NextFunc
  */
 export async function logout(req: Request, res: Response, next: NextFunction) {
   try {
-    const token = req.body.refreshToken
-    const user = await userService.findUserDetail(res.locals.loggedInPayload.id);
-    console.log('user ', user)
-    if (user){
-      console.log('user', user);
-
-      await userService.removeSession(user, token)
+    const token = req.body.refreshToken;
+    const user = await userService.findUserDetail(
+      res.locals.loggedInPayload.id
+    );
+    if (user) {
+      await userService.removeSession(user, token);
     }
     const response = [];
 

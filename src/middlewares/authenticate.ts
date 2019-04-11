@@ -1,11 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 
-import * as jwt from '../utils/jwt';
 import logger from '../utils/logger';
 import config from '../config/config';
 import ErrorType from './../resources/enums/ErrorType';
 import BadRequestError from '../exceptions/BadRequestError';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
+
+import * as jwt from '../utils/jwt';
 
 const { errors } = config;
 
@@ -60,3 +61,4 @@ async function authenticate(req: Request, res: Response, next: NextFunction) {
 }
 
 export default authenticate;
+

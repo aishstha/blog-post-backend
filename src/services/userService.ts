@@ -1,5 +1,6 @@
-import * as UserDao from '../daos/user';
-import UserPayload from '../domain/requests/UserPayload';
+import UserPayload from "../domain/requests/UserPayload";
+
+import * as UserDao from "../daos/user";
 
 /**
  * Fetch all users from users table.
@@ -84,8 +85,9 @@ export async function removeSession(
   if (index > -1) {
     user.refreshToken = user.refreshToken.splice(index, 1);
 
-    const updateUser: any = await UserDao.update(user._id, user);
+    await UserDao.update(user._id, user);
   }
 
   return [];
 }
+

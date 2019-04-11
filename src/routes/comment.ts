@@ -16,6 +16,11 @@ router.put(
   commentController.editSubComment
 );
 
-router.delete("/:id", commentController.deletePostById); // ,authenticate,
+router.delete("/:id", authenticate, commentController.deletePostById);
+router.put("/:id", commentController.update);
+router.delete(
+  "/:id/sub-comments/:subCommentId",
+  commentController.removeSubComment
+);
 
 export default router;

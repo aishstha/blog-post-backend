@@ -43,7 +43,6 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     const userPayload = req.body as LoginPayload;
     const payload = await authService.verifyGoogleAccount(userPayload.token);
     const user = await userService.findByGoogleId(payload.userId)
-    console.log('payload', payload);
 
     if (user.length) {
       throw new Error('User already existed')
@@ -82,7 +81,6 @@ export async function update(req: Request, res: Response, next: NextFunction) {
   try {
     const userPayload = req.body as UserPayload;
 
-    // const response = await userService.update(req.params.id, userPayload);
     const response = await userService.update(res.locals.loggedInPayload.id, userPayload);
 
     res.status(HttpStatus.OK).json({
