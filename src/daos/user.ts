@@ -61,7 +61,6 @@ export function updateRefreshToken(user: object , refreshToken: string){
 export function findUserDetail(id: any){
   return new Promise((resolve, reject) => {
     User.findById(id)
-    
     .then((user: any) => resolve(user))
     .catch((err: any) => reject(err));
   });
