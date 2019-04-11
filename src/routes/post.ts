@@ -1,20 +1,24 @@
 import { Router } from 'express';
 
+import authenticate from '../middlewares/authenticate';
+
 import * as postController from '../controllers/post';
 import * as commentController from '../controllers/comment';
 
 const router: Router = Router();
 
-// TODO Keep doc type
 router.get('/', postController.getAll);
 router.get('/:id', postController.getById);
 
-router.post('/', postController.create);
-router.post('/:postId/comments', commentController.create);
+router.post('/', authenticate, postController.create);
+router.post('/:postId/comments', authenticate, commentController.create);
 
-router.delete('/:id', postController.deletePostById);
+router.delete('/:id', postController.deletePostById); // ,authenticate,
 
-// router.put('/:id', userController.update);
-// router.get('/:postId/comments', commentController.create)
+router.put(
+  '/:id',
+  authenticate,
+  postController.update
+);
 
 export default router;

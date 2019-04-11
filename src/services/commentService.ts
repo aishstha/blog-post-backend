@@ -1,39 +1,84 @@
-import * as CommentDao from '../daos/comment';
-import CommentPayload from '../domain/requests/CommentPayload';
+import config from "../config/config";
+import UnauthorizedError from "../exceptions/UnauthorizedError";
+import CommentPayload from "../domain/requests/CommentPayload";
 
-export async function create(comment: CommentPayload, postId: any): Promise<CommentPayload[]> {
-  const newComment: any = await CommentDao.create(comment, postId)
+import * as CommentDao from "../daos/comment";
+
+export async function create(
+  comment: CommentPayload,
+  postId: any,
+  userId: any
+): Promise<CommentPayload[]> {
+  const newComment: any = await CommentDao.create(comment, postId, userId);
 
   return newComment;
 }
 
 export async function findByPostId(postId: any): Promise<CommentPayload[]> {
-  const newComment: any = await CommentDao.findByPostId(postId)
+  const newComment: any = await CommentDao.findByPostId(postId);
 
   return newComment;
 }
 
-// export function fetchAll(searchKey: string){
-//   return new Promise((resolve, reject) => {
-//     const option = {}
-//     if (searchKey) {
-//       option.name = searchKey;
-//     }
-
-//     CommentDao.find(option)
-//     .then((user: any) => resolve(user))
-//     .catch((err: any) => reject(err));
-//   });
-// }
-
-export async function createSubComment(subComment: CommentPayload, commentId: any): Promise<CommentPayload[]> {
-  const newComment: any = await CommentDao.createSubComment(subComment, commentId)
+export async function createSubComment(
+  subComment: CommentPayload,
+  commentId: any,
+  userId: any
+): Promise<CommentPayload[]> {
+  const newComment: any = await CommentDao.createSubComment(
+    subComment,
+    commentId,
+    userId
+  );
 
   return newComment;
 }
 
-export async function updateSubComment(subComment: CommentPayload, commentId: any, subCommentId: any): Promise<CommentPayload[]> {
-  const newComment: any = await CommentDao.updateSubComment(subComment, commentId, subCommentId)
+export async function updateSubComment(
+  subComment: CommentPayload,
+  commentId: any,
+  subCommentId: any,
+  currentUserId: any
+): Promise<CommentPayload[]> {
+  const newComment: any = await CommentDao.updateSubComment(
+    subComment,
+    commentId,
+    subCommentId,
+    currentUserId
+  );
 
   return newComment;
 }
+
+export async function update(
+  id: string,
+  comment: CommentPayload,
+  currentUserId: any
+): Promise<CommentPayload[]> {
+  const fetchComment: any = await CommentDao.getById(id);
+
+  console.log(typeof fetchComment.users._id);
+
+  if (currentUserId !== fetchComment.users.toString()) {
+    throw new UnauthorizedError(config.ERROR_MESSAGE.INVALID_ACTION);
+
+    return;
+  }
+
+  console.log("eta ayo");
+  const updateComment: any = await CommentDao.update(id, {
+    description: comment.description
+  });
+
+  return updateComment;
+}
+
+export async function removeSubComment(
+  commentId: any,
+  userId: any
+): Promise<CommentPayload[]> {
+  const newComment: any = await CommentDao.removeSubComment(commentId, userId);
+
+  return newComment;
+}
+

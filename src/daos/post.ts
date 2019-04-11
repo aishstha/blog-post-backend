@@ -35,7 +35,15 @@ export function fetchAll(searchKey: string) {
 
 export function deleteById(id: string) {
   return new Promise((resolve, reject) => {
-    Post.deleteOne({ id })
+    Post.deleteOne({ _id: id  })
+      .then((user: any) => resolve(user))
+      .catch((err: any) => reject(err));
+  });
+}
+
+export function updateById(id: any, data: object) {
+  return new Promise((resolve, reject) => {
+    Post.findOneAndUpdate({ _id: id }, data, { new: true })
       .then((user: any) => resolve(user))
       .catch((err: any) => reject(err));
   });
