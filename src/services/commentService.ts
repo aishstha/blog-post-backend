@@ -1,5 +1,5 @@
-import * as CommentDao from "../daos/comment";
-import CommentPayload from "../domain/requests/CommentPayload";
+import * as CommentDao from '../daos/comment';
+import CommentPayload from '../domain/requests/CommentPayload';
 
 export async function create(
   comment: CommentPayload,

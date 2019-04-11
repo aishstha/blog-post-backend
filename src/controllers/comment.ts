@@ -1,9 +1,9 @@
-import * as HttpStatus from "http-status-codes";
-import { Request, Response, NextFunction } from "express";
+import * as HttpStatus from 'http-status-codes';
+import { Request, Response, NextFunction } from 'express';
 
 // import config from '../config/config';
-import * as commentService from "../services/commentService";
-import CommentPayload from "../domain/requests/CommentPayload";
+import * as commentService from '../services/commentService';
+import CommentPayload from '../domain/requests/CommentPayload';
 
 /**
  * Controller to handle /posts POST request.
@@ -26,7 +26,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "created"
+      message: 'created'
     });
   } catch (err) {
     next(err); // TODO: Handle error with proper message when user id id not found
@@ -57,7 +57,7 @@ export async function editSubComment(
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "created"
+      message: 'created'
     });
   } catch (err) {
     next(err);
@@ -89,7 +89,7 @@ export async function createSubComment(
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "created"
+      message: 'created'
     });
   } catch (err) {
     next(err);
@@ -109,13 +109,13 @@ export async function deletePostById(
   next: NextFunction
 ) {
   try {
-    console.log("req.param",req.params);
+    console.log('req.param', req.params);
     const response = await commentService.deleteById(req.params.id);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "Deleted"
+      message: 'Deleted'
     });
   } catch (err) {
     next(err);

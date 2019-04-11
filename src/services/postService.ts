@@ -1,8 +1,8 @@
-import * as PostDao from "../daos/post";
-import PostPayload from "../domain/requests/PostPayload";
-import { IPostPayload } from "./../interface/post";
+import * as PostDao from '../daos/post';
+import PostPayload from '../domain/requests/PostPayload';
+import { IPostPayload } from './../interface/post';
 
-const option = "";
+const option = '';
 export async function create(
   userId: any,
   post: PostPayload

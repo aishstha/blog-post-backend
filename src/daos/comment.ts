@@ -1,10 +1,10 @@
-import Comment from "../models/commentModel";
-import CommentPayload from "../domain/requests/CommentPayload";
+import Comment from '../models/commentModel';
+import CommentPayload from '../domain/requests/CommentPayload';
 
 export function create(comment: CommentPayload, postId: any, userId: any) {
   return new Promise((resolve, reject) => {
     const buildComment = {
-      description: comment.description || "",
+      description: comment.description || '',
       posts: {
         _id: postId
       },
@@ -23,18 +23,18 @@ export function findByPostId(postId: string) {
   return new Promise((resolve, reject) => {
     let option = {};
     if (!postId) {
-      throw new Error("pass post id please");
+      throw new Error('pass post id please');
     }
     option = {
       posts: postId
     };
 
     Comment.find(option)
-      .populate("users", "name")
+      .populate('users', 'name')
       .populate({
-        path: "sub_comments.users",
-        model: "users",
-        select: "name"
+        path: 'sub_comments.users',
+        model: 'users',
+        select: 'name'
       })
       .then((user: any) => resolve(user))
       .catch((err: any) => reject(err));
@@ -48,7 +48,7 @@ export function createSubComment(
 ) {
   return new Promise((resolve, reject) => {
     const sub_comment = {
-      description: subComment.description || "",
+      description: subComment.description || '',
       users: {
         _id: userId
       }
@@ -72,7 +72,7 @@ export function updateSubComment(
     Comment.findById(commentId)
       .then((comment: any) => {
         const subDoc = comment.sub_comments.id(subCommentId);
-        subDoc.set({ description: subComment.description || "" });
+        subDoc.set({ description: subComment.description || '' });
 
         comment
           .save()

@@ -51,7 +51,7 @@ export function findByGoogleId(id: any){
 export function updateRefreshToken(user: object , refreshToken: string){
   return new Promise((resolve, reject) => {
     user[0].refreshToken.push(refreshToken);
-    console.log("final user ", user)
+    console.log('final user ', user)
     User.findOneAndUpdate({_id: user[0]._id}, user[0])
     .then((user: any) => resolve(user))
     .catch((err: any) => reject(err));

@@ -41,9 +41,9 @@ export function deleteById(id: string) {
   });
 }
 
-export function updateById(id: any, user: object) {
+export function updateById(id: any, data: object) {
   return new Promise((resolve, reject) => {
-    Post.findOneAndUpdate({ _id: id }, user, { new: true })
+    Post.findOneAndUpdate({ _id: id }, data, { new: true })
       .then((user: any) => resolve(user))
       .catch((err: any) => reject(err));
   });

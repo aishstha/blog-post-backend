@@ -127,7 +127,7 @@ export async function getUserDetail(req: Request, res: Response, next: NextFunct
   try {
     const response = await userService.getById(res.locals.loggedInPayload.id);
 
-     res.status(HttpStatus.OK).json({
+    res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
       message: messages.users.insert

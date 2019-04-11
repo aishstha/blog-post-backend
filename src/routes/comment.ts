@@ -16,4 +16,6 @@ router.put(
   commentController.editSubComment
 );
 
+router.delete("/:id", commentController.deletePostById); // ,authenticate,
+
 export default router;

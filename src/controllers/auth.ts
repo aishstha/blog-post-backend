@@ -17,8 +17,9 @@ import BadRequestError from '../exceptions/BadRequestError';
 export async function login(req: Request, res: Response, next: NextFunction) {
   try {
 
-    if(!req.body.token)
+    if (!req.body.token) {
       throw new BadRequestError(config.ERROR_MESSAGE.TOKEN_REQUIRED);
+    }
 
     const loginPayload = req.body as LoginPayload; // todo loginorsignup change name
     const payload = await authService.verifyGoogleAccount(loginPayload.token);
@@ -74,12 +75,12 @@ export async function getAccesstoken(req: Request, res: Response, next: NextFunc
   try {
     const tokenData = {id: res.locals.loggedInPayload.id};
 
-     const accessToken = utilService.generateAccessToken(tokenData);
+    const accessToken = utilService.generateAccessToken(tokenData);
 
-     res.status(HttpStatus.OK).json({
+    res.status(HttpStatus.OK).json({
       accessToken,
       code: HttpStatus.OK,
-      message: "genereated"
+      message: 'genereated'
     });
   } catch (error) {
     next(error);
@@ -96,19 +97,19 @@ export async function getAccesstoken(req: Request, res: Response, next: NextFunc
 export async function logout(req: Request, res: Response, next: NextFunction) {
   try {
     const token = req.body.refreshToken
-    let user = await userService.findUserDetail(res.locals.loggedInPayload.id);
-    console.log("user ", user)
-    if(user){
-      console.log("user", user);
+    const user = await userService.findUserDetail(res.locals.loggedInPayload.id);
+    console.log('user ', user)
+    if (user){
+      console.log('user', user);
 
-       await userService.removeSession(user, token)
+      await userService.removeSession(user, token)
     }
-    let response=[];
+    const response = [];
 
-     res.status(HttpStatus.OK).json({
+    res.status(HttpStatus.OK).json({
       response,
       code: HttpStatus.OK,
-      message: "genereated"
+      message: 'genereated'
     });
   } catch (error) {
     next(error);

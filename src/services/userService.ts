@@ -1,5 +1,5 @@
-import * as UserDao from "../daos/user";
-import UserPayload from "../domain/requests/UserPayload";
+import * as UserDao from '../daos/user';
+import UserPayload from '../domain/requests/UserPayload';
 
 /**
  * Fetch all users from users table.
@@ -80,7 +80,7 @@ export async function removeSession(
   user: UserPayload,
   token: string
 ): Promise<UserPayload[]> {
-  let index = user.refreshToken.indexOf(token);
+  const index = user.refreshToken.indexOf(token);
   if (index > -1) {
     user.refreshToken = user.refreshToken.splice(index, 1);
 
