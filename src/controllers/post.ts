@@ -98,7 +98,7 @@ export async function deletePostById(
   next: NextFunction
 ) {
   try {
-    const response = await postService.deleteById(req.params.id);
+    const response = await postService.deleteById(req.params.id, res.locals.loggedInPayload.id);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,

@@ -1,6 +1,7 @@
 import config from '../config/config';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
 import CommentPayload from '../domain/requests/CommentPayload';
+import PostPayload from '../domain/requests/PostPayload';
 
 import * as CommentDao from '../daos/comment';
 
@@ -61,7 +62,6 @@ export async function update(
     throw new UnauthorizedError(config.ERROR_MESSAGE.INVALID_ACTION);
   }
 
-  console.log('eta ayo');
   const updateComment: any = await CommentDao.update(id, {
     description: comment.description
   });
@@ -79,7 +79,8 @@ export async function removeSubComment(
 }
 
 export async function deleteById(id: string): Promise<PostPayload[]> {
-  const posts: any = await CommentDao.deleteById({ _id: id });
+  const posts: any = await CommentDao.deleteById(id);
 
   return posts;
 }
+

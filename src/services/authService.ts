@@ -11,7 +11,7 @@ export async function verifyGoogleAccount(token: any) {
     }
 
     client
-      .verifyIdToken({ idToken: token, audiance: config.googleClientId })
+      .verifyIdToken({ idToken: token, audience: config.googleClientId })
       .then((login: any) => {
         const payload = login.getPayload();
 

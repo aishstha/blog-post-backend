@@ -22,8 +22,7 @@
     "test": "jest --config jest.json",
     "lint": "tslint src/**/*.{ts,js} test/**/*.{ts,js}",
     "lint:fix": "tslint --fix src/**/*.{ts,js} test/**/*.{ts,js}",
-    "prettify":
-      "prettier --single-quote --parser typescript --print-width 120 --write scripts/*.ts src/**/*.{ts,js} test/**/*.{ts,js}"
+    "prettify": "prettier --single-quote --parser typescript --print-width 120 --write scripts/*.ts src/**/*.{ts,js} test/**/*.{ts,js}"
   },
   "lint-staged": {
     "linters": {
@@ -36,7 +35,14 @@
   },
   "private": true,
   "license": "MIT",
-  "keywords": ["api", "es6", "node", "express", "javascript", "typescript"],
+  "keywords": [
+    "api",
+    "es6",
+    "node",
+    "express",
+    "javascript",
+    "typescript"
+  ],
   "dependencies": {
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",

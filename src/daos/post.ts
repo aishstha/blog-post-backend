@@ -23,12 +23,8 @@ export function fetchAll(searchKey: string) {
   return new Promise((resolve, reject) => {
     let searchOption = {};
     if (searchKey) {
-      let params = {title: `/${searchKey}/`}
-      searchOption = { title: params.replace(/'/g, "") };
+      searchOption.title = new RegExp(searchKey, 'i')
     }
-
-    console.log("searchOption", searchOption);
-
 
     Post.find(searchOption)
       .populate("users", "name")

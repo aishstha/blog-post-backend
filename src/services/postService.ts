@@ -1,8 +1,10 @@
-import PostPayload from '../domain/requests/PostPayload';
+import PostPayload from "../domain/requests/PostPayload";
 
-import { IPostPayload } from './../interface/post';
+import { IPostPayload } from "./../interface/post";
 
-import * as PostDao from '../daos/post';
+import * as PostDao from "../daos/post";
+import UnauthorizedError from "../exceptions/UnauthorizedError";
+import config from "../config/config";
 
 export async function create(
   userId: any,
@@ -12,7 +14,6 @@ export async function create(
     _id: userId
   };
   const posts: any = await PostDao.create(post);
-  // const posts: any = await PostDao.fetchAll(option);
 
   return posts;
 }
@@ -34,10 +35,18 @@ export async function fetchAll(searchKey: string): Promise<PostPayload[]> {
   return users;
 }
 
-export async function deleteById(id: string): Promise<PostPayload[]> {
-  const posts: any = await PostDao.deleteById(id);
+export async function deleteById(
+  id: string,
+  currentUserId: string
+): Promise<PostPayload[]> {
+  const currentPost: any = await PostDao.getById(id);
 
-  return posts;
+  if (currentUserId != currentPost.users._id) {
+    throw new UnauthorizedError(config.ERROR_MESSAGE.INVALID_ACTION);
+  }
+  await PostDao.deleteById(id);
+
+  return [];
 }
 
 /**
