@@ -63,7 +63,7 @@ export async function findByGoogleId(id: string): Promise<UserPayload[]> {
 }
 
 export async function updateRefreshToken(
-  user: string,
+  user: Array<UserPayload>,
   refreshToken: string
 ): Promise<UserPayload[]> {
   const updateUser: any = await UserDao.updateRefreshToken(user, refreshToken);

@@ -5,7 +5,6 @@ import nodeErrorHandler from "./middlewares/nodeErrorHandler";
 import mongoose from "mongoose";
 
 const { port, host, dbConnectionString } = config;
-console.log("dbConnectionString", dbConnectionString);
 const options = { server: { socketOptions: { keepAlive: 1 } } };
 mongoose.connect(dbConnectionString, options);
 

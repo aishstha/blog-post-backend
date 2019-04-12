@@ -19,7 +19,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     const commentPayload = req.body as CommentPayload;
 
     if (!req.params.postId) {
-      throw new BadRequestError(config.ERROR_MESSAGE.TOKEN_REQUIRED);
+      throw new BadRequestError(config.ERROR_MESSAGE.POST_ID_NOT_FOUND);
     }
 
     const response = await commentService.create(
@@ -114,8 +114,7 @@ export async function deleteById(
   next: NextFunction
 ) {
   try {
-    console.log("req.param", req.params);
-    const response = await commentService.deleteById(req.params.id);
+    const response = await commentService.deleteById(req.params.id, );
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
@@ -137,7 +136,6 @@ export async function deleteById(
 export async function update(req: Request, res: Response, next: NextFunction) {
   try {
     const commentPayload = req.body as CommentPayload;
-    console.log("res.locals.loggedInPayload.id", res.locals.loggedInPayload);
     const response = await commentService.update(
       req.params.id,
       commentPayload,
