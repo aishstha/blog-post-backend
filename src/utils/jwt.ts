@@ -2,18 +2,16 @@ import jwbt from 'jsonwebtoken';
 
 import logger from './logger';
 import config from '../config/config';
-import JWTPayload from '../domain/misc/JWTPayload';
-import LoggedInUser from '../domain/misc/LoggedInUser';
 
 const { accessTokenDuration, accessTokenSecretKey, refreshTokenDuration, refreshTokenSecretKey } = config.auth;
 
 /**
  * Generate access token from given data
  *
- * @param {LoggedInUser} data
+ * @param {object} data
  * @returns {string}
  */
-export function generateAccessToken(data: LoggedInUser): string {
+export function generateAccessToken(data: any): string {
   logger.debug('JWT: Generating access token - ', JSON.stringify({ data, expiresIn: accessTokenDuration }, null, 2));
 
   return jwbt.sign(data, accessTokenSecretKey, { expiresIn: accessTokenDuration });
@@ -22,10 +20,10 @@ export function generateAccessToken(data: LoggedInUser): string {
 /**
  * Generate refresh token from given data
  *
- * @param {JWTPayload} data
+ * @param {object} data
  * @returns {string}
  */
-export function generateRefreshToken(data: JWTPayload): string {
+export function generateRefreshToken(data: any): string {
   logger.debug('JWT: Generating refresh token -', JSON.stringify({ data, expiresIn: refreshTokenDuration }, null, 2));
 
   return jwbt.sign(data, refreshTokenSecretKey, { expiresIn: refreshTokenDuration });
@@ -50,3 +48,4 @@ export function verifyAccessToken(token: string): object | string {
 export function verifyRefreshToken(token: string): object | string {
   return jwbt.verify(token, refreshTokenSecretKey);
 }
+

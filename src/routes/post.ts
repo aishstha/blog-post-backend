@@ -13,7 +13,7 @@ router.get("/:id", postController.getById);
 router.post("/", authenticate, postController.create);
 router.post("/:postId/comments", authenticate, commentController.create);
 
-router.delete("/:id", authenticate, postController.deletePostById); // ,authenticate,
+router.delete("/:id", authenticate, postController.deletePostById);
 
 router.put("/:id", authenticate, postController.update);
 

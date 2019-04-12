@@ -25,7 +25,6 @@ export default {
     saltRounds: process.env.SALT_ROUNDS || 11,
     accessTokenDuration: process.env.ACCESS_TOKEN_DURATION || '24h', // TODO CHANGE THIS
     refreshTokenDuration: process.env.REFRESH_TOKEN_DURATION || '24h',
-    emailVerificationDuration: process.env.EMAIL_VERIFICATION_DURATION || 24,
     accessTokenSecretKey:
       process.env.ACCESS_TOKEN_SECRET_KEY || '<ACCESS_TOKEN_SECRET_KEY>',
     refreshTokenSecretKey:
@@ -39,6 +38,7 @@ export default {
     datePattern: process.env.LOGGING_DATE_PATTERN || 'YYYY-MM-DD'
   },
   ERROR_MESSAGE: {
+    POST_ID_NOT_FOUND: 'Post id not found',
     TOKEN_REQUIRED: 'Token is required to login',
     INVALID_GOOGLE_CLIENT_ID: 'Invalid google client id',
     INVALID_ACTION: 'You can not perform this action'

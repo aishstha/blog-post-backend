@@ -13,9 +13,15 @@ Clone the repository, install the dependencies and get started right away.
 
     $ git clone git@github.com:aishwarya4shrestha/blog-post-frontend.git
     $ cd blog-post-fronteuvertz-backendnd
-    $ yarn   # or npm install
+    $ yarn # or npm install
 
 Make a copy of `.env.example` as `.env` and update your application details and database credentials. 
+
+    $DB_HOST ='mongodb://localhost:27017/fusemachine'
+
+Keep password and username if required to access mongo db 
+
+Start mongo server
 
 Finally, start the application.
 

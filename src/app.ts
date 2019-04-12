@@ -21,7 +21,7 @@ app.use(morgan("dev"));
 
 app.use(
   bodyParser.json({
-    limit: "100kb"
+    limit: "50mb"
   })
 );
 app.use(bodyParser.urlencoded({ extended: true }));
