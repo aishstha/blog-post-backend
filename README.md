@@ -21,7 +21,7 @@ Make a copy of `.env.example` as `.env` and update your application details and 
 
 Keep password and username if required to access mongo db 
 
-Start mongo server
+Start mongo server.
 
 Finally, start the application.
 
