@@ -12,7 +12,7 @@
 Clone the repository, install the dependencies and get started right away.
 
     $ git clone git@github.com:aishwarya4shrestha/blog-post-frontend.git
-    $ cd blog-post-fronteuvertz-backendnd
+    $ cd blog-post-backend
     $ yarn # or npm install
 
 Make a copy of `.env.example` as `.env` and update your application details and database credentials. 
