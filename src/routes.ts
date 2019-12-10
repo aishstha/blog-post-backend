@@ -21,4 +21,3 @@ router.use('/posts', post);
 router.use('/comments', comment);
 
 export default router;
-

@@ -42,10 +42,10 @@ export async function create(req: Request, res: Response, next: NextFunction) {
  */
 export async function getById(req: Request, res: Response, next: NextFunction) {
   try {
-    const post = await postService.getById(req.params.id);
+    const post: any = await postService.getById(req.params.id);
     const comments = await commentService.findByPostId(req.params.id);
 
-    const response = {
+    const response: any = {
       comments,
       id: post._id,
       users: post.users,
@@ -98,7 +98,10 @@ export async function deletePostById(
   next: NextFunction
 ) {
   try {
-    const response = await postService.deleteById(req.params.id, res.locals.loggedInPayload.id);
+    const response = await postService.deleteById(
+      req.params.id,
+      res.locals.loggedInPayload.id
+    );
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,

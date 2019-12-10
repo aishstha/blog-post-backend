@@ -1,5 +1,5 @@
-import Post from "../models/postModel";
-import PostPayload from "../domain/requests/PostPayload";
+import Post from '../models/postModel';
+import PostPayload from '../domain/requests/PostPayload';
 
 export function create(post: PostPayload) {
   return new Promise((resolve, reject) => {
@@ -13,7 +13,7 @@ export function create(post: PostPayload) {
 export function getById(id: any) {
   return new Promise((resolve, reject) => {
     Post.findById(id)
-      .populate("users", "name")
+      .populate('users', 'name')
       .then((user: any) => resolve(user))
       .catch((err: any) => reject(err));
   });
@@ -21,13 +21,13 @@ export function getById(id: any) {
 
 export function fetchAll(searchKey: string) {
   return new Promise((resolve, reject) => {
-    let searchOption = {};
+    const searchOption: any = {};
     if (searchKey) {
-      searchOption.title = new RegExp(searchKey, 'i')
+      searchOption.title = new RegExp(searchKey, 'i');
     }
 
     Post.find(searchOption)
-      .populate("users", "name")
+      .populate('users', 'name')
       .then((user: any) => resolve(user))
       .catch((err: any) => reject(err));
   });

@@ -3,7 +3,7 @@ import { OAuth2Client } from 'google-auth-library';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
 
 export async function verifyGoogleAccount(token: any) {
-  const client = new OAuth2Client(config.googleClientId, '', '');
+  const client: any = new OAuth2Client(config.googleClientId, '', '');
 
   return new Promise((resolve, reject) => {
     if (!token) {

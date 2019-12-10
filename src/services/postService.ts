@@ -1,10 +1,10 @@
-import PostPayload from "../domain/requests/PostPayload";
+import PostPayload from '../domain/requests/PostPayload';
 
-import { IPostPayload } from "./../interface/post";
+import { IPostPayload } from './../interface/post';
 
-import * as PostDao from "../daos/post";
-import UnauthorizedError from "../exceptions/UnauthorizedError";
-import config from "../config/config";
+import * as PostDao from '../daos/post';
+import UnauthorizedError from '../exceptions/UnauthorizedError';
+import config from '../config/config';
 
 export async function create(
   userId: any,

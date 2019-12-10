@@ -3,15 +3,15 @@ import { Request, Response, NextFunction } from 'express';
 import * as jwt from '../utils/jwt';
 import logger from '../utils/logger';
 import config from '../config/config';
-import ErrorType from './../resources/enums/ErrorType';
+// import ErrorType from './../resources/enums/ErrorType';
 import BadRequestError from '../exceptions/BadRequestError';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
 
 const { errors } = config;
 
 const tokenErrorMessageMap: any = {
-  [ErrorType.INVALID]: errors.invalidToken,
-  [ErrorType.EXPIRED]: errors.refreshTokenExpired
+  // [ErrorType.INVALID]: errors.invalidToken,
+  // [ErrorType.EXPIRED]: errors.refreshTokenExpired
 };
 
 /**

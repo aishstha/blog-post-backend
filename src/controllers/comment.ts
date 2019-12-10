@@ -1,9 +1,9 @@
-import * as HttpStatus from "http-status-codes";
-import { Request, Response, NextFunction } from "express";
+import * as HttpStatus from 'http-status-codes';
+import { Request, Response, NextFunction } from 'express';
 
-import CommentPayload from "../domain/requests/CommentPayload";
+import CommentPayload from '../domain/requests/CommentPayload';
 
-import * as commentService from "../services/commentService";
+import * as commentService from '../services/commentService';
 import BadRequestError from '../exceptions/BadRequestError';
 import config from '../config/config';
 
@@ -31,7 +31,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "created"
+      message: 'created'
     });
   } catch (err) {
     next(err);
@@ -63,7 +63,7 @@ export async function editSubComment(
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "created"
+      message: 'created'
     });
   } catch (err) {
     next(err);
@@ -94,7 +94,7 @@ export async function createSubComment(
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "created"
+      message: 'created'
     });
   } catch (err) {
     next(err);
@@ -114,12 +114,12 @@ export async function deleteById(
   next: NextFunction
 ) {
   try {
-    const response = await commentService.deleteById(req.params.id, );
+    const response = await commentService.deleteById(req.params.id );
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "Deleted"
+      message: 'Deleted'
     });
   } catch (err) {
     next(err);
@@ -145,7 +145,7 @@ export async function update(req: Request, res: Response, next: NextFunction) {
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "abc"
+      message: 'abc'
     });
   } catch (err) {
     next(err);
@@ -173,7 +173,7 @@ export async function removeSubComment(
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: "Deleted"
+      message: 'Deleted'
     });
   } catch (err) {
     next(err);

@@ -8,7 +8,7 @@ interface UserPayload {
   userId: string;
   image: string;
   accessToken: string;
-  refreshToken: Array<string>;
+  refreshToken: string[];
 }
 
 export default UserPayload;

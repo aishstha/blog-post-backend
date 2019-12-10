@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import logger from '../utils/logger';
 import config from '../config/config';
-import ErrorType from './../resources/enums/ErrorType';
+// import ErrorType from './../resources/enums/ErrorType';
 import BadRequestError from '../exceptions/BadRequestError';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
 
@@ -11,8 +11,8 @@ import * as jwt from '../utils/jwt';
 const { errors } = config;
 
 const tokenErrorMessageMap: any = {
-  [ErrorType.INVALID]: errors.invalidToken,
-  [ErrorType.EXPIRED]: errors.accessTokenExpired
+  // [ErrorType.INVALID]: errors.invalidToken,
+  // [ErrorType.EXPIRED]: errors.accessTokenExpired
 };
 
 /**
