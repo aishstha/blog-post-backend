@@ -20,6 +20,8 @@ Make a copy of `.env.example` as `.env` and update your application details and 
     $DB_HOST ='mongodb://localhost:27017/fusemachine'
     $GOOGLE_CLIENT_ID:<CLIENTID> 
 
+You have to have mongo installed.
+
 Keep password and username if required to access mongo db 
 
 Start mongo server.
