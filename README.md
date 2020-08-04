@@ -18,6 +18,7 @@ Clone the repository, install the dependencies and get started right away.
 Make a copy of `.env.example` as `.env` and update your application details and database credentials. 
 
     $DB_HOST ='mongodb://localhost:27017/fusemachine'
+    $GOOGLE_CLIENT_ID:<CLIENTID> 
 
 Keep password and username if required to access mongo db 
 
