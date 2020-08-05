@@ -14,24 +14,22 @@ export default {
   name: app.name,
   version: app.version,
   googleClientId:
-    process.env.GOOGLE_CLIENT_ID ||
-    '1058823769266-758kalf90cmirensqppf8qt6rfebpvjs.apps.googleusercontent.com',
+    process.env.GOOGLE_CLIENT_ID || '1058823769266-758kalf90cmirensqppf8qt6rfebpvjs.apps.googleusercontent.com',
   host: process.env.APP_HOST || '127.0.0.1',
   dbConnectionString:
-    process.env.DB_HOST || 'mongodb://localhost:27017/fusemachine',
+    process.env.DB_HOST ||
+    `mongodb+srv://Aishwarya:testPassw0rd@cluster0.s4c9x.mongodb.net/<dbname>?retryWrites=true&w=majority`,
+  // "mongodb+srv://cluster0.s4c9x.mongodb.net/fusemachine",
+  // process.env.DB_HOST || "mongodb://localhost:27017/fusemachine",
   environment: process.env.NODE_ENV || 'development',
   appUrl: process.env.APP_URL || 'http://localhost:8888',
-  port:
-    (isTestEnvironment ? process.env.TEST_APP_PORT : process.env.APP_PORT) ||
-    '8000',
+  port: (isTestEnvironment ? process.env.TEST_APP_PORT : process.env.APP_PORT) || '8000',
   auth: {
     saltRounds: process.env.SALT_ROUNDS || 11,
     accessTokenDuration: process.env.ACCESS_TOKEN_DURATION || '24h', // TODO CHANGE THIS
     refreshTokenDuration: process.env.REFRESH_TOKEN_DURATION || '24h',
-    accessTokenSecretKey:
-      process.env.ACCESS_TOKEN_SECRET_KEY || '<ACCESS_TOKEN_SECRET_KEY>',
-    refreshTokenSecretKey:
-      process.env.REFRESH_TOKEN_SECRET_KEY || '<REFRESH_TOKEN_SECRET_KEY>'
+    accessTokenSecretKey: process.env.ACCESS_TOKEN_SECRET_KEY || '<ACCESS_TOKEN_SECRET_KEY>',
+    refreshTokenSecretKey: process.env.REFRESH_TOKEN_SECRET_KEY || '<REFRESH_TOKEN_SECRET_KEY>'
   },
   logging: {
     dir: process.env.LOGGING_DIR || 'logs',
