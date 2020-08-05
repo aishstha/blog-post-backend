@@ -1,8 +1,11 @@
-import * as HttpStatus from "http-status-codes";
-import { Request, Response, NextFunction } from "express";
+import * as HttpStatus from 'http-status-codes';
+import { Request, Response, NextFunction } from 'express';
 
-import config from "../config/config";
-import * as userService from "../services/userService";
+import config from '../config/config';
+import * as userService from '../services/userService';
+import * as authService from '../services/authService';
+import UserPayload from '../domain/requests/UserPayload';
+import LoginPayload from '../domain/requests/LoginPayload';
 
 const { messages } = config;
 
@@ -15,7 +18,8 @@ const { messages } = config;
  */
 export async function getAll(req: Request, res: Response, next: NextFunction) {
   try {
-    const response = await userService.fetchAll();
+    const searchKey = req.query.searchKey || '';
+    const response = await userService.fetchAll(searchKey);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
@@ -28,50 +32,105 @@ export async function getAll(req: Request, res: Response, next: NextFunction) {
 }
 
 /**
- * Controller to handle /users GET request.
+ * Controller to handle /users POST request.
  *
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function fetchById(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function create(req: Request, res: Response, next: NextFunction) {
   try {
-    const id: number = Number(req.params.id);
-    const response: any = await userService.fetchById(id);
+    const userPayload = req.body as LoginPayload;
+    const payload: any = await authService.verifyGoogleAccount(userPayload.token);
+    const user: any = await userService.findByGoogleId(payload.userId);
+
+    if (user.length) {
+      throw new Error('User already existed');
+    }
+
+    const newUser: any = {
+      name: payload.name,
+      email: payload.email,
+      userId: payload.userId,
+      image: payload.imageUrl
+    };
+
+    const response = await userService.create(newUser);
+    console.log('created user ', response);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
-      message: messages.users.fetchById
+      message: messages.users.insert
+    });
+  } catch (err) {
+    console.log('TODO: No user found', err);
+
+    next(err);
+  }
+}
+
+/**
+ * Controller to handle /users POST request.
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
+export async function update(req: Request, res: Response, next: NextFunction) {
+  try {
+    const userPayload = req.body as UserPayload;
+
+    const response = await userService.update(res.locals.loggedInPayload.id, userPayload);
+
+    res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      data: response,
+      message: messages.users.insert
     });
   } catch (err) {
     next(err);
   }
 }
 
-// /**
-//  * Controller to handle /users POST request.
-//  *
-//  * @param {Request} req
-//  * @param {Response} res
-//  * @param {NextFunction} next
-//  */
-// export async function store(req: Request, res: Response, next: NextFunction) {
-//   try {
-//     const userPayload = req.body as UserPayload;
+/**
+ * Controller to handle /users POST request.
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
+export async function getById(req: Request, res: Response, next: NextFunction) {
+  try {
+    const response = await userService.getById(req.params.id);
 
-//     const response = await userService.insert(userPayload);
+    res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      data: response,
+      message: messages.users.insert
+    });
+  } catch (err) {
+    next(err);
+  }
+}
 
-//     res.status(HttpStatus.OK).json({
-//       code: HttpStatus.OK,
-//       data: response,
-//       message: messages.users.insert
-//     });
-//   } catch (err) {
-//     next(err);
-//   }
-// }
+/**
+ * Controller to handle /users POST request.
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
+export async function getUserDetail(req: Request, res: Response, next: NextFunction) {
+  try {
+    const response = await userService.getById(res.locals.loggedInPayload.id);
+
+    res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      data: response,
+      message: messages.users.insert
+    });
+  } catch (err) {
+    next(err);
+  }
+}

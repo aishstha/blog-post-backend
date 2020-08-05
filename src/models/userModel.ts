@@ -1,26 +1,14 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-let Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 export const Users = new Schema({
   name: {
     type: String,
     required: true
   },
-  gender: {
+  email: {
     type: String,
     required: false
-  },
-  address: {
-    type: String,
-    required: false
-  },
-  loginType: {
-    type: String,
-    required: false
-  },
-  isActive: {
-    type: Boolean,
-    default: true
   },
   createdAt: {
     type: Date,
@@ -31,27 +19,17 @@ export const Users = new Schema({
     default: Date.now
   },
   userId: {
-    type: String,
-    required: true
+    type: String
+  },
+  image: {
+    type: String
+  },
+  refreshToken: {
+    type: Array
   }
 });
 
-Users.statics = {
-  fetchAll() {
-    return this.find()
-      .exec()
-      .then((res: any) => {
-        return res;
-      });
-  },
+module.exports = exports = mongoose.model('users', Users);
 
-  fetchById(id: string) {
-    return this.find({ id })
-      .exec()
-      .then((res: any) => {
-        return res;
-      });
-  }
-};
-
-module.exports = exports = mongoose.model("users", Users);
+// let User = mongoose.model("User", Users);
+// module.exports = User;

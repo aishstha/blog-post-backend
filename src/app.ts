@@ -18,10 +18,15 @@ app.locals.version = version;
 app.use(cors());
 app.use(helmet());
 app.use(morgan('dev'));
-app.use(bodyParser.json());
+
+app.use(
+  bodyParser.json({
+    limit: '50mb'
+  })
+);
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', routes);
+app.use('/api', routes);
 
 app.use(genericErrorHandler);
 app.use(notFoundHandler);

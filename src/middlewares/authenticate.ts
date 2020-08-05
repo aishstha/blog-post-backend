@@ -1,17 +1,18 @@
 import { Request, Response, NextFunction } from 'express';
 
-import * as jwt from '../utils/jwt';
 import logger from '../utils/logger';
 import config from '../config/config';
-import ErrorType from './../resources/enums/ErrorType';
+// import ErrorType from './../resources/enums/ErrorType';
 import BadRequestError from '../exceptions/BadRequestError';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
+
+import * as jwt from '../utils/jwt';
 
 const { errors } = config;
 
 const tokenErrorMessageMap: any = {
-  [ErrorType.INVALID]: errors.invalidToken,
-  [ErrorType.EXPIRED]: errors.accessTokenExpired
+  // [ErrorType.INVALID]: errors.invalidToken,
+  // [ErrorType.EXPIRED]: errors.accessTokenExpired
 };
 
 /**
@@ -30,8 +31,9 @@ async function authenticate(req: Request, res: Response, next: NextFunction) {
     }
 
     logger.debug('JWT: Verifying token - ', req.headers.authorization, res.locals.accessToken);
-    const response: any = jwt.verifyAccessToken(res.locals.accessToken);
-    res.locals.loggedInPayload = response.encryptedData;
+    const response: any = await jwt.verifyAccessToken(res.locals.accessToken);
+
+    res.locals.loggedInPayload = response;
     logger.debug('JWT: Authentication verified - ', JSON.stringify(res.locals.loggedInPayload, null, 2));
 
     next();
