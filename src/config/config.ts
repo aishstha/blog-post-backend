@@ -18,7 +18,7 @@ export default {
   host: process.env.APP_HOST || '127.0.0.1',
   dbConnectionString:
     process.env.DB_HOST ||
-    `mongodb+srv://Aishwarya:testPassw0rd@cluster0.s4c9x.mongodb.net/<dbname>?retryWrites=true&w=majority`,
+    `mongodb+srv://Aishwarya:testPassw0rd@cluster0.s4c9x.mongodb.net/fusemachine?retryWrites=true&w=majority`,
   // "mongodb+srv://cluster0.s4c9x.mongodb.net/fusemachine",
   // process.env.DB_HOST || "mongodb://localhost:27017/fusemachine",
   environment: process.env.NODE_ENV || 'development',

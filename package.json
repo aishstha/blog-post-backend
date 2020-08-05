@@ -12,8 +12,8 @@
     "npm": ">= 5.6.0"
   },
   "scripts": {
-    "start:dev": "backpack",
-    "start": "node build/main.js",
+    "start": "backpack",
+    "start:build": "node build/main.js",
     "clean": "rimraf build",
     "prepush": "yarn build",
     "precommit": "lint-staged",
@@ -44,7 +44,7 @@
     "typescript"
   ],
   "dependencies": {
-    "bcrypt": "^2.0.1",
+    "bcrypt": "=2.0.1",
     "body-parser": "^1.18.3",
     "chalk": "^2.3.0",
     "cors": "^2.8.4",
