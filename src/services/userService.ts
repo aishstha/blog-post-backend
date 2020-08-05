@@ -34,10 +34,7 @@ export async function create(user: UserPayload): Promise<UserPayload[]> {
  *
  * @returns {Promise<UserPayload[]>}
  */
-export async function update(
-  id: string,
-  user: UserPayload
-): Promise<UserPayload[]> {
+export async function update(id: string, user: UserPayload): Promise<UserPayload[]> {
   const updateUser: any = await UserDao.update(id, user);
 
   return updateUser;
@@ -62,10 +59,7 @@ export async function findByGoogleId(id: string): Promise<UserPayload[]> {
   return updateUser;
 }
 
-export async function updateRefreshToken(
-  user: UserPayload[],
-  refreshToken: string
-): Promise<UserPayload[]> {
+export async function updateRefreshToken(user: UserPayload[], refreshToken: string): Promise<UserPayload[]> {
   const updateUser: any = await UserDao.updateRefreshToken(user, refreshToken);
 
   return updateUser;
@@ -77,10 +71,7 @@ export async function findUserDetail(id: string): Promise<UserPayload[]> {
   return updateUser;
 }
 
-export async function removeSession(
-  user: UserPayload,
-  token: string
-): Promise<UserPayload[]> {
+export async function removeSession(user: UserPayload, token: string): Promise<UserPayload[]> {
   const index = user.refreshToken.indexOf(token);
   if (index > -1) {
     user.refreshToken = user.refreshToken.splice(index, 1);
@@ -90,4 +81,3 @@ export async function removeSession(
 
   return [];
 }
-

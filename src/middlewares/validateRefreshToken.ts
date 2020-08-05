@@ -21,16 +21,9 @@ const tokenErrorMessageMap: any = {
  * @param {Response} res
  * @param {NextFunction} next
  */
-async function validateRefreshToken(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+async function validateRefreshToken(req: Request, res: Response, next: NextFunction) {
   try {
-    res.locals.refreshToken = String(req.headers.authorization).replace(
-      'Bearer ',
-      ''
-    );
+    res.locals.refreshToken = String(req.headers.authorization).replace('Bearer ', '');
 
     if (!req.headers.authorization || !res.locals.refreshToken) {
       throw new BadRequestError(errors.noToken);
@@ -39,10 +32,7 @@ async function validateRefreshToken(
     logger.debug('JWT: Verifying token - ', res.locals.refreshToken);
     const response: any = jwt.verifyRefreshToken(res.locals.refreshToken);
     res.locals.loggedInPayload = response;
-    logger.debug(
-      'JWT: Authentication verified - ',
-      JSON.stringify(res.locals.loggedInPayload, null, 2)
-    );
+    logger.debug('JWT: Authentication verified - ', JSON.stringify(res.locals.loggedInPayload, null, 2));
 
     next();
   } catch (err) {

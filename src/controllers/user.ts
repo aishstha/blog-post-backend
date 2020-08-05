@@ -41,9 +41,7 @@ export async function getAll(req: Request, res: Response, next: NextFunction) {
 export async function create(req: Request, res: Response, next: NextFunction) {
   try {
     const userPayload = req.body as LoginPayload;
-    const payload: any = await authService.verifyGoogleAccount(
-      userPayload.token
-    );
+    const payload: any = await authService.verifyGoogleAccount(userPayload.token);
     const user: any = await userService.findByGoogleId(payload.userId);
 
     if (user.length) {
@@ -83,10 +81,7 @@ export async function update(req: Request, res: Response, next: NextFunction) {
   try {
     const userPayload = req.body as UserPayload;
 
-    const response = await userService.update(
-      res.locals.loggedInPayload.id,
-      userPayload
-    );
+    const response = await userService.update(res.locals.loggedInPayload.id, userPayload);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
@@ -126,11 +121,7 @@ export async function getById(req: Request, res: Response, next: NextFunction) {
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function getUserDetail(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function getUserDetail(req: Request, res: Response, next: NextFunction) {
   try {
     const response = await userService.getById(res.locals.loggedInPayload.id);
 

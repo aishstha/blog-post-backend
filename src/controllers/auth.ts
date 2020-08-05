@@ -23,9 +23,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
     }
 
     const loginPayload = req.body as LoginPayload; // todo loginorsignup change name
-    const payload: any = await authService.verifyGoogleAccount(
-      loginPayload.token
-    );
+    const payload: any = await authService.verifyGoogleAccount(loginPayload.token);
     let user: any = await userService.findByGoogleId(payload.userId);
 
     if (!user.length) {
@@ -73,11 +71,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function getAccesstoken(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function getAccesstoken(req: Request, res: Response, next: NextFunction) {
   try {
     const tokenData = { id: res.locals.loggedInPayload.id };
 
@@ -103,9 +97,7 @@ export async function getAccesstoken(
 export async function logout(req: Request, res: Response, next: NextFunction) {
   try {
     const token = req.body.refreshToken;
-    const user: any = await userService.findUserDetail(
-      res.locals.loggedInPayload.id
-    );
+    const user: any = await userService.findUserDetail(res.locals.loggedInPayload.id);
     if (user) {
       await userService.removeSession(user, token);
     }
