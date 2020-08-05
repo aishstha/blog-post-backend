@@ -24,27 +24,17 @@ const tokenErrorMessageMap: any = {
  */
 async function authenticate(req: Request, res: Response, next: NextFunction) {
   try {
-    res.locals.accessToken = String(req.headers.authorization).replace(
-      'Bearer ',
-      ''
-    );
+    res.locals.accessToken = String(req.headers.authorization).replace('Bearer ', '');
 
     if (!req.headers.authorization || !res.locals.accessToken) {
       throw new BadRequestError(errors.noToken);
     }
 
-    logger.debug(
-      'JWT: Verifying token - ',
-      req.headers.authorization,
-      res.locals.accessToken
-    );
+    logger.debug('JWT: Verifying token - ', req.headers.authorization, res.locals.accessToken);
     const response: any = await jwt.verifyAccessToken(res.locals.accessToken);
 
     res.locals.loggedInPayload = response;
-    logger.debug(
-      'JWT: Authentication verified - ',
-      JSON.stringify(res.locals.loggedInPayload, null, 2)
-    );
+    logger.debug('JWT: Authentication verified - ', JSON.stringify(res.locals.loggedInPayload, null, 2));
 
     next();
   } catch (err) {

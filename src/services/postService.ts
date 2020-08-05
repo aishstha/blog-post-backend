@@ -6,10 +6,7 @@ import * as PostDao from '../daos/post';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
 import config from '../config/config';
 
-export async function create(
-  userId: any,
-  post: PostPayload
-): Promise<PostPayload[]> {
+export async function create(userId: any, post: PostPayload): Promise<PostPayload[]> {
   post.users = {
     _id: userId
   };
@@ -35,10 +32,7 @@ export async function fetchAll(searchKey: string): Promise<PostPayload[]> {
   return users;
 }
 
-export async function deleteById(
-  id: string,
-  currentUserId: string
-): Promise<PostPayload[]> {
+export async function deleteById(id: string, currentUserId: string): Promise<PostPayload[]> {
   const currentPost: any = await PostDao.getById(id);
 
   if (currentUserId != currentPost.users._id) {
@@ -57,10 +51,7 @@ export async function deleteById(
  *
  * @returns {Promise<IPostPayload[]>}
  */
-export async function updateById(
-  id: string,
-  post: IPostPayload
-): Promise<IPostPayload[]> {
+export async function updateById(id: string, post: IPostPayload): Promise<IPostPayload[]> {
   const updateUser: any = await PostDao.updateById(id, post);
 
   return updateUser;

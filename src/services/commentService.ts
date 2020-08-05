@@ -5,11 +5,7 @@ import PostPayload from '../domain/requests/PostPayload';
 
 import * as CommentDao from '../daos/comment';
 
-export async function create(
-  comment: CommentPayload,
-  postId: any,
-  userId: any
-): Promise<CommentPayload[]> {
+export async function create(comment: CommentPayload, postId: any, userId: any): Promise<CommentPayload[]> {
   const newComment: any = await CommentDao.create(comment, postId, userId);
 
   return newComment;
@@ -26,11 +22,7 @@ export async function createSubComment(
   commentId: any,
   userId: any
 ): Promise<CommentPayload[]> {
-  const newComment: any = await CommentDao.createSubComment(
-    subComment,
-    commentId,
-    userId
-  );
+  const newComment: any = await CommentDao.createSubComment(subComment, commentId, userId);
 
   return newComment;
 }
@@ -41,21 +33,12 @@ export async function updateSubComment(
   subCommentId: any,
   currentUserId: any
 ): Promise<CommentPayload[]> {
-  const newComment: any = await CommentDao.updateSubComment(
-    subComment,
-    commentId,
-    subCommentId,
-    currentUserId
-  );
+  const newComment: any = await CommentDao.updateSubComment(subComment, commentId, subCommentId, currentUserId);
 
   return newComment;
 }
 
-export async function update(
-  id: string,
-  comment: CommentPayload,
-  currentUserId: any
-): Promise<CommentPayload[]> {
+export async function update(id: string, comment: CommentPayload, currentUserId: any): Promise<CommentPayload[]> {
   const fetchComment: any = await CommentDao.getById(id);
 
   if (currentUserId !== fetchComment.users.toString()) {
@@ -69,10 +52,7 @@ export async function update(
   return updateComment;
 }
 
-export async function removeSubComment(
-  commentId: any,
-  userId: any
-): Promise<CommentPayload[]> {
+export async function removeSubComment(commentId: any, userId: any): Promise<CommentPayload[]> {
   const newComment: any = await CommentDao.removeSubComment(commentId, userId);
 
   return newComment;
@@ -83,4 +63,3 @@ export async function deleteById(id: string): Promise<PostPayload[]> {
 
   return posts;
 }
-

@@ -48,4 +48,3 @@ export function verifyAccessToken(token: string): object | string {
 export function verifyRefreshToken(token: string): object | string {
   return jwbt.verify(token, refreshTokenSecretKey);
 }
-

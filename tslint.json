@@ -1,11 +1,17 @@
 {
   "defaultSeverity": "error",
-  "extends": ["tslint:recommended", "tslint-consistent-codestyle", "tslint-config-prettier"],
+  "extends": [
+    "tslint:recommended",
+    "tslint-consistent-codestyle",
+    "tslint-config-prettier"
+  ],
   "jsRules": {
     "object-literal-sort-keys": false
   },
   "linterOptions": {
-    "exclude": ["**/*.d.ts"]
+    "exclude": [
+      "**/*.d.ts"
+    ]
   },
   "rules": {
     "ban": false,
@@ -21,18 +27,61 @@
     "object-literal-sort-keys": false,
     "no-switch-case-fall-through": true,
     "object-shorthand-properties-first": true,
-
-    "quotemark": [true, "single"],
-    "array-type": [true, "array"],
-    "max-line-length": [true, 120],
-    "interface-name": [true, "never-prefix"],
-    "align": [true, "parameters", "statements"],
-    "triple-equals": [true, "allow-null-check"],
-    "no-inferrable-types": [true, "ignore-params"],
-    "arrow-parens": [true, "ban-single-arg-parens"],
-    "typedef": [true, "parameter", "property-declaration"],
-    "no-console": [true, "log", "info", "time", "debug", "error", "trace", "timeEnd"],
-    "variable-name": [true, "check-format", "ban-keywords", "allow-pascal-case", "allow-leading-underscore"],
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "array-type": [
+      true,
+      "array"
+    ],
+    "max-line-length": [
+      true,
+      120
+    ],
+    "interface-name": [
+      false,
+      "never-prefix"
+    ],
+    "align": [
+      true,
+      "parameters",
+      "statements"
+    ],
+    "triple-equals": [
+      false,
+      "allow-null-check"
+    ],
+    "no-inferrable-types": [
+      true,
+      "ignore-params"
+    ],
+    "arrow-parens": [
+      true,
+      "ban-single-arg-parens"
+    ],
+    "typedef": [
+      true,
+      "parameter",
+      "property-declaration"
+    ],
+    "no-console": [
+      false,
+      "log",
+      "info",
+      "time",
+      "debug",
+      "error",
+      "trace",
+      "timeEnd"
+    ],
+    "variable-name": [
+      true,
+      "check-format",
+      "ban-keywords",
+      "allow-pascal-case",
+      "allow-leading-underscore"
+    ],
     "trailing-comma": [
       true,
       {
@@ -49,6 +98,7 @@
       "check-operator",
       "check-typecast",
       "check-separator"
-    ]
+    ],
+    "only-arrow-functions": false
   }
 }

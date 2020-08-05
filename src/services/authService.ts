@@ -23,9 +23,7 @@ export async function verifyGoogleAccount(token: any) {
             imageUrl: payload.picture
           });
         } else {
-          throw new UnauthorizedError(
-            config.ERROR_MESSAGE.INVALID_GOOGLE_CLIENT_ID
-          );
+          throw new UnauthorizedError(config.ERROR_MESSAGE.INVALID_GOOGLE_CLIENT_ID);
         }
       })
       .catch((err: any) => reject(err));

@@ -43,34 +43,22 @@ export function findByPostId(postId: string) {
   });
 }
 
-export function createSubComment(
-  subComment: CommentPayload,
-  commentId: any,
-  userId: any
-) {
+export function createSubComment(subComment: CommentPayload, commentId: any, userId: any) {
   return new Promise((resolve, reject) => {
-    const sub_comment = {
+    const subCommentResult = {
       description: subComment.description || '',
       users: {
         _id: userId
       }
     };
 
-    Comment.findOneAndUpdate(
-      { _id: commentId },
-      { $push: { sub_comments: sub_comment } }
-    )
+    Comment.findOneAndUpdate({ _id: commentId }, { $push: { sub_comments: subCommentResult } })
       .then((commentDetail: any) => resolve(commentDetail))
       .catch((err: any) => reject(err));
   });
 }
 
-export function updateSubComment(
-  subComment: CommentPayload,
-  commentId: any,
-  subCommentId: any,
-  currentUserId: any
-) {
+export function updateSubComment(subComment: CommentPayload, commentId: any, subCommentId: any, currentUserId: any) {
   return new Promise((resolve, reject) => {
     Comment.findById(commentId)
       .then((comment: any) => {
@@ -108,7 +96,7 @@ export function deleteById(id: string) {
 export function update(id: any, comment: object) {
   return new Promise((resolve, reject) => {
     Comment.findOneAndUpdate({ _id: id }, comment)
-      .then((comment: any) => resolve(comment))
+      .then((commentData: any) => resolve(commentData))
       .catch((err: any) => reject(err));
   });
 }

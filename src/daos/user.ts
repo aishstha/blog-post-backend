@@ -5,7 +5,7 @@ export function create(user: UserPayload) {
   return new Promise((resolve, reject) => {
     const UserModel = new User(user);
     UserModel.save()
-      .then((user: any) => resolve(user))
+      .then((userData: any) => resolve(userData))
       .catch((err: any) => reject(err));
   });
 }
@@ -18,7 +18,7 @@ export function fetchAll(searchKey: string) {
     }
 
     User.find(option)
-      .then((user: any) => resolve(user))
+      .then((userData: any) => resolve(userData))
       .catch((err: any) => reject(err));
   });
 }
@@ -26,7 +26,7 @@ export function fetchAll(searchKey: string) {
 export function update(id: any, user: object) {
   return new Promise((resolve, reject) => {
     User.findOneAndUpdate({ _id: id }, user)
-      .then((user: any) => resolve(user))
+      .then((userData: any) => resolve(userData))
       .catch((err: any) => reject(err));
   });
 }
@@ -48,14 +48,11 @@ export function findByGoogleId(id: any) {
   });
 }
 
-export function updateRefreshToken(
-  user: UserPayload[],
-  refreshToken: string
-) {
+export function updateRefreshToken(user: UserPayload[], refreshToken: string) {
   return new Promise((resolve, reject) => {
     user[0].refreshToken.push(refreshToken);
     User.findOneAndUpdate({ _id: user[0]._id }, user[0])
-      .then((user: any) => resolve(user))
+      .then((userData: any) => resolve(userData))
       .catch((err: any) => reject(err));
   });
 }
@@ -63,7 +60,7 @@ export function updateRefreshToken(
 export function findUserDetail(id: any) {
   return new Promise((resolve, reject) => {
     User.findById(id)
-      .then((user: any) => resolve(user))
+      .then((userData: any) => resolve(userData))
       .catch((err: any) => reject(err));
   });
 }

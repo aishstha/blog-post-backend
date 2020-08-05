@@ -18,10 +18,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
   try {
     const postPayload = req.body as PostPayload;
 
-    const response = await postService.create(
-      res.locals.loggedInPayload.id,
-      postPayload
-    );
+    const response = await postService.create(res.locals.loggedInPayload.id, postPayload);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
@@ -92,16 +89,9 @@ export async function getAll(req: Request, res: Response, next: NextFunction) {
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function deletePostById(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function deletePostById(req: Request, res: Response, next: NextFunction) {
   try {
-    const response = await postService.deleteById(
-      req.params.id,
-      res.locals.loggedInPayload.id
-    );
+    const response = await postService.deleteById(req.params.id, res.locals.loggedInPayload.id);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,

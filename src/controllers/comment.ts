@@ -22,11 +22,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
       throw new BadRequestError(config.ERROR_MESSAGE.POST_ID_NOT_FOUND);
     }
 
-    const response = await commentService.create(
-      commentPayload,
-      req.params.postId,
-      res.locals.loggedInPayload.id
-    );
+    const response = await commentService.create(commentPayload, req.params.postId, res.locals.loggedInPayload.id);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
@@ -45,11 +41,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function editSubComment(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function editSubComment(req: Request, res: Response, next: NextFunction) {
   try {
     const subCommentPayload = req.body as CommentPayload;
 
@@ -77,11 +69,7 @@ export async function editSubComment(
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function createSubComment(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function createSubComment(req: Request, res: Response, next: NextFunction) {
   try {
     const subCommentPayload = req.body as CommentPayload;
 
@@ -108,13 +96,9 @@ export async function createSubComment(
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function deleteById(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function deleteById(req: Request, res: Response, next: NextFunction) {
   try {
-    const response = await commentService.deleteById(req.params.id );
+    const response = await commentService.deleteById(req.params.id);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
@@ -136,11 +120,7 @@ export async function deleteById(
 export async function update(req: Request, res: Response, next: NextFunction) {
   try {
     const commentPayload = req.body as CommentPayload;
-    const response = await commentService.update(
-      req.params.id,
-      commentPayload,
-      res.locals.loggedInPayload.id
-    );
+    const response = await commentService.update(req.params.id, commentPayload, res.locals.loggedInPayload.id);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
@@ -159,16 +139,9 @@ export async function update(req: Request, res: Response, next: NextFunction) {
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function removeSubComment(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export async function removeSubComment(req: Request, res: Response, next: NextFunction) {
   try {
-    const response = await commentService.removeSubComment(
-      req.params.id,
-      req.params.subCommentId
-    );
+    const response = await commentService.removeSubComment(req.params.id, req.params.subCommentId);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
