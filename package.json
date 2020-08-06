@@ -8,7 +8,7 @@
     "url": "git@github.com:cham11ng/typescript-api-starter.git"
   },
   "engines": {
-    "node": "= 8.11.0",
+    "node": "=10.16.3",
     "npm": "= 5.6.0"
   },
   "scripts": {
@@ -44,7 +44,7 @@
     "typescript"
   ],
   "dependencies": {
-    "bcrypt": "=2.0.1",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "chalk": "^2.3.0",
     "cors": "^2.8.4",
