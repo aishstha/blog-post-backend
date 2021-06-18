@@ -40,4 +40,4 @@ const Comments = new Schema({
   sub_comments: [childSchema]
 });
 
-module.exports = exports = mongoose.model('comments', Comments);
+export default mongoose.model('comments', Comments);
