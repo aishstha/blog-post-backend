@@ -75,7 +75,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
 }
 
 /**
- * Controller to handle /users POST request.
+ * Controller to handle /users PUT request.
  *
  * @param {Request} req
  * @param {Response} res
@@ -84,8 +84,10 @@ export async function create(req: Request, res: Response, next: NextFunction) {
 export async function update(req: Request, res: Response, next: NextFunction) {
   try {
     const userPayload = req.body as UserPayload;
+    // console.log('req.params.id:------------------------ ', req.params.id);
+    // console.log('res.locals.loggedInPayload.id: ', res.locals.loggedInPayload.id);
 
-    const response = await userService.update(res.locals.loggedInPayload.id, userPayload);
+    const response = await userService.update(req.params.id, userPayload);
 
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
