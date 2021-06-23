@@ -34,7 +34,7 @@ export function update(id: any, user: object) {
 export function getById(id: any) {
   return new Promise((resolve, reject) => {
     User.findById(id)
-      .select('name email image')
+      .select('name email phoneNumber address')
       .then((user: any) => resolve(user))
       .catch((err: any) => reject(err));
   });

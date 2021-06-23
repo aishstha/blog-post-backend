@@ -19,7 +19,7 @@ router.post('/signup', userController.create);
 /**
  * PUT /api/profile/:id
  */
-router.put('/', authenticate, userController.update);
+router.put('/:id', authenticate, userController.update);
 
 /**
  * GET /api/profile/:id

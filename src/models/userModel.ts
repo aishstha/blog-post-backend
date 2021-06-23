@@ -26,6 +26,12 @@ export const Users = new Schema({
   },
   refreshToken: {
     type: Array
+  },
+  address: {
+    type: String
+  },
+  phoneNumber: {
+    type: Number
   }
 });
 
