@@ -17,10 +17,14 @@ const { messages } = config;
  * @param {NextFunction} next
  */
 export async function getAll(req: Request, res: Response, next: NextFunction) {
-  try {
-    const searchKey = req.query.searchKey || '';
-    const response = await userService.fetchAll(searchKey);
+  const searchKey = req.query.searchKey || '';
+  if (typeof searchKey !== 'string') {
+    res.status(500).json({ error: 'Invalid dataset' });
 
+    return;
+  }
+  try {
+    const response = await userService.fetchAll(searchKey);
     res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,
       data: response,
